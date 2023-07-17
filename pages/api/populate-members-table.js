@@ -28,6 +28,12 @@ export default async function handle(req, res) {
   });
 }
 
+/**
+ * find members that are in Prisma but not in Orbit
+ *
+ * @param {Object[]} orbitMembers - an array of member objects from Orbit
+ * @returns {Promise} a Promise that resolves with an array of emails of members to be removed
+ */
 export async function membersToRemove(orbitMembers) {
   const prismaMemberEmails = await getAllMemberEmails();
   const orbitMemberEmails = orbitMembers.map(
@@ -39,6 +45,11 @@ export async function membersToRemove(orbitMembers) {
   );
 }
 
+/**
+ * fetch data from Orbit API
+ *
+ * @returns {Promise} a Promise that resolves with an array of member objects
+ */
 export async function fetchOrbitData() {
   const response = await fetch(
     "https://app.orbit.love/api/v1/delete44/members?identity=email",
