@@ -4,7 +4,11 @@ export default async function handle(req, res) {
   const prisma = new PrismaClient();
 
   try {
-    const members = await prisma.member.findMany();
+    const members = await prisma.member.findMany({
+      orderBy: {
+        name: "asc",
+      },
+    });
 
     res.status(200).json(members);
   } catch (e) {

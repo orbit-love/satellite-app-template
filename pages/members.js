@@ -3,12 +3,20 @@ import { useState } from "react";
 
 export default function Members({ initialMembers }) {
   const [members, setMembers] = useState(initialMembers);
+  const [error, setError] = useState("");
 
   async function refreshMembers() {
-    const res = await fetch(`/api/populateMembersTable`);
+    const res = await fetch("/api/populateMembersTable", { method: "POST" });
 
-    const data = await res.json();
-    setMembers(data);
+    if (res.ok) {
+      const data = await res.json();
+
+      setMembers(data.members);
+    } else {
+      setError(
+        "There was a problem syncing the members! Please verify your workspace slug & API key are set correctly in the environment variables."
+      );
+    }
   }
 
   return (
@@ -24,13 +32,17 @@ export default function Members({ initialMembers }) {
           <ul>
             {members.map((member) => (
               <li key={member.id}>
-                <p>{member.name}</p>
+                <p>
+                  {member.name} - {member.email}
+                </p>
               </li>
             ))}
           </ul>
         ) : (
           <p>No members</p>
         )}
+
+        {!!error ? <p>{error}</p> : ""}
 
         <button onClick={refreshMembers}>Refresh</button>
       </main>
