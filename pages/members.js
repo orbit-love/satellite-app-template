@@ -6,7 +6,7 @@ export default function Members({ initialMembers }) {
   const [error, setError] = useState("");
 
   async function refreshMembers() {
-    const res = await fetch("/api/populateMembersTable", { method: "POST" });
+    const res = await fetch("/api/populate-members-table", { method: "POST" });
 
     if (res.ok) {
       const data = await res.json();

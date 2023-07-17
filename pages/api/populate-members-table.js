@@ -1,4 +1,9 @@
-import prisma from "../../lib/db";
+import {
+  upsertMember,
+  removeMembers,
+  getAllMembers,
+  getAllMemberEmails,
+} from "../../lib/helpers/prisma-helpers";
 
 export default async function handle(req, res) {
   if (req.method !== "POST") {
@@ -9,45 +14,22 @@ export default async function handle(req, res) {
   const members = await fetchData();
 
   // Update or create members that are in Orbit but not Prisma
-  let prismaPromises = members.map(async (member) =>
-    prisma.member.upsert({
-      where: {
-        email: member.attributes.email,
-      },
-      update: {
-        name: member.attributes.name,
-      },
-      create: {
-        email: member.attributes.email,
-        name: member.attributes.name,
-      },
-    })
-  );
+  let prismaPromises = members.map(async (member) => upsertMember(member));
 
   // Destroy members that are in Prisma but not in Orbit
   const removeList = await membersToRemove(members);
-  prismaPromises.push(
-    prisma.member.deleteMany({
-      where: {
-        email: { in: removeList },
-      },
-    })
-  );
+  prismaPromises.push(removeMembers(removeList));
 
   // Resolve requests
   await Promise.all(prismaPromises);
 
   res.status(200).send({
-    members: await prisma.member.findMany({
-      orderBy: {
-        name: "asc",
-      },
-    }),
+    members: await getAllMembers(),
   });
 }
 
 async function membersToRemove(orbitMembers) {
-  const prismaMemberEmails = await fetchMemberEmailsFromPrisma();
+  const prismaMemberEmails = await getAllMemberEmails();
   const orbitMemberEmails = orbitMembers.map(
     (member) => member.attributes.email
   );
@@ -55,17 +37,6 @@ async function membersToRemove(orbitMembers) {
   return prismaMemberEmails.filter(
     (email) => !orbitMemberEmails.includes(email)
   );
-}
-
-async function fetchMemberEmailsFromPrisma() {
-  const allEmails = await prisma.member.findMany({
-    select: {
-      email: true,
-      // TODO: Add check for admin field here so we don't remove admins
-    },
-  });
-
-  return allEmails.map((member) => member.email);
 }
 
 export async function fetchData() {
