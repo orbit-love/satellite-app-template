@@ -1,23 +1,15 @@
 import Head from "next/head";
 import { useState } from "react";
 
-export async function getServerSideProps(context) {
-  const res = await fetch(`http://${context.req.headers.host}/api/members`);
-  const data = await res.json();
-
-  if (!data) {
-    return {
-      props: { initialMembers: [] },
-    };
-  }
-
-  return {
-    props: { initialMembers: data },
-  };
-}
-
 export default function Members({ initialMembers }) {
   const [members, setMembers] = useState(initialMembers);
+
+  async function refreshMembers() {
+    const res = await fetch(`/api/populateMembersTable`);
+
+    const data = await res.json();
+    setMembers(data);
+  }
 
   return (
     <>
@@ -39,7 +31,24 @@ export default function Members({ initialMembers }) {
         ) : (
           <p>No members</p>
         )}
+
+        <button onClick={refreshMembers}>Refresh</button>
       </main>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const res = await fetch(`http://${context.req.headers.host}/api/members`);
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      props: { initialMembers: [] },
+    };
+  }
+
+  return {
+    props: { initialMembers: data },
+  };
 }
