@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../lib/db";
 
 export default async function handle(req, res) {
-  const prisma = new PrismaClient();
-
   try {
     const members = await prisma.member.findMany({
       orderBy: {

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../lib/db";
 
 export default async function handle(req, res) {
   if (req.method !== "POST") {
@@ -6,7 +6,6 @@ export default async function handle(req, res) {
     return;
   }
 
-  const prisma = new PrismaClient();
   const members = await fetchData();
 
   // Update or create members that are in Orbit but not Prisma
@@ -26,7 +25,7 @@ export default async function handle(req, res) {
   );
 
   // Destroy members that are in Prisma but not in Orbit
-  const removeList = await membersToRemove(prisma, members);
+  const removeList = await membersToRemove(members);
   prismaPromises.push(
     prisma.member.deleteMany({
       where: {
@@ -47,8 +46,8 @@ export default async function handle(req, res) {
   });
 }
 
-async function membersToRemove(prisma, orbitMembers) {
-  const prismaMemberEmails = await fetchMemberEmailsFromPrisma(prisma);
+async function membersToRemove(orbitMembers) {
+  const prismaMemberEmails = await fetchMemberEmailsFromPrisma();
   const orbitMemberEmails = orbitMembers.map(
     (member) => member.attributes.email
   );
@@ -58,7 +57,7 @@ async function membersToRemove(prisma, orbitMembers) {
   );
 }
 
-async function fetchMemberEmailsFromPrisma(prisma) {
+async function fetchMemberEmailsFromPrisma() {
   const allEmails = await prisma.member.findMany({
     select: {
       email: true,
