@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 
 export async function getServerSideProps(context) {
   const res = await fetch(`http://${context.req.headers.host}/api/members`);
@@ -6,16 +7,18 @@ export async function getServerSideProps(context) {
 
   if (!data) {
     return {
-      notFound: true,
+      props: { initialMembers: [] },
     };
   }
 
   return {
-    props: { members: data },
+    props: { initialMembers: data },
   };
 }
 
-export default function Members({ members }) {
+export default function Members({ initialMembers }) {
+  const [members, setMembers] = useState(initialMembers);
+
   return (
     <>
       <Head>
