@@ -11,7 +11,7 @@ export default async function handle(req, res) {
     return;
   }
 
-  const members = await fetchData();
+  const members = await fetchOrbitData();
 
   // Update or create members that are in Orbit but not Prisma
   let prismaPromises = members.map(async (member) => upsertMember(member));
@@ -28,7 +28,7 @@ export default async function handle(req, res) {
   });
 }
 
-async function membersToRemove(orbitMembers) {
+export async function membersToRemove(orbitMembers) {
   const prismaMemberEmails = await getAllMemberEmails();
   const orbitMemberEmails = orbitMembers.map(
     (member) => member.attributes.email
@@ -39,7 +39,7 @@ async function membersToRemove(orbitMembers) {
   );
 }
 
-export async function fetchData() {
+export async function fetchOrbitData() {
   const response = await fetch(
     "https://app.orbit.love/api/v1/delete44/members?identity=email",
     {
