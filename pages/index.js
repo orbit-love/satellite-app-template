@@ -1,16 +1,12 @@
-import Head from "next/head";
+import Layout from "../components/layout";
+import Login from "../components/login";
 
-export default function Home() {
+export default function Home({ session }) {
   return (
-    <>
-      <Head>
-        <title>Member Directory</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout session={session}>
+      <h1>Hello world</h1>
 
-      <main>
-        <h1>Hello world</h1>
-      </main>
-    </>
+      <Login />
+    </Layout>
   );
 }

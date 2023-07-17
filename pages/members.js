@@ -1,7 +1,7 @@
-import Head from "next/head";
 import { useState } from "react";
+import Layout from "../components/layout";
 
-export default function Members({ initialMembers }) {
+export default function Members({ initialMembers, session }) {
   const [members, setMembers] = useState(initialMembers);
   const [error, setError] = useState("");
 
@@ -20,33 +20,26 @@ export default function Members({ initialMembers }) {
   }
 
   return (
-    <>
-      <Head>
-        <title>Member Directory</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout session={session}>
+      <h1>Members</h1>
+      {!!members && members.length > 0 ? (
+        <ul>
+          {members.map((member) => (
+            <li key={member.id}>
+              <p>
+                {member.name} - {member.email}
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No members</p>
+      )}
 
-      <main>
-        <h1>Members</h1>
-        {!!members && members.length > 0 ? (
-          <ul>
-            {members.map((member) => (
-              <li key={member.id}>
-                <p>
-                  {member.name} - {member.email}
-                </p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No members</p>
-        )}
+      {!!error ? <p>{error}</p> : ""}
 
-        {!!error ? <p>{error}</p> : ""}
-
-        <button onClick={refreshMembers}>Refresh</button>
-      </main>
-    </>
+      <button onClick={refreshMembers}>Refresh</button>
+    </Layout>
   );
 }
 
