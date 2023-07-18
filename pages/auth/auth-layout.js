@@ -9,7 +9,7 @@ export default function AuthLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>{children}</main>
+      <main className="bg-white">{children}</main>
     </>
   );
 }
