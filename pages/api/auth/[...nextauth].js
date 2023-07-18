@@ -17,6 +17,12 @@ export const authOptions = {
       return validEmails.includes(user.email);
     },
   },
+  pages: {
+    signIn: "/auth/sign-in",
+    signOut: "/auth/sign-out",
+    error: "/auth/error", // Error code passed in query string as ?error=
+    verifyRequest: "/auth/verify-request", // (used for check email message)
+  },
   // Configure one or more authentication providers
   providers: [
     EmailProvider({
