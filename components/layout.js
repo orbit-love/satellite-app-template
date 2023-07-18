@@ -14,9 +14,13 @@ export default function Layout({ children }) {
     if (status === "unauthenticated") router.push("/api/auth/signin");
   }, [status]);
 
-  // TODO: Better loading state (including Head)
   if (status !== "authenticated") {
-    return <p>Loading...</p>;
+    return (
+      <Head>
+        <title>Member Directory</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+    );
   }
 
   // Only show directory if confirmed authenticated

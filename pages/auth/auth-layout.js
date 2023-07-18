@@ -13,9 +13,13 @@ export default function AuthLayout({ children }) {
     if (status === "authenticated") router.push("/");
   }, [status]);
 
-  // TODO: Better loading state (including Head)
   if (status !== "unauthenticated") {
-    return <p>Loading...</p>;
+    return (
+      <Head>
+        <title>Member Directory</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+    );
   }
 
   return (
