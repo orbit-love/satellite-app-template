@@ -15,10 +15,11 @@ export default function Layout({ children }) {
   }, [status]);
 
   // TODO: Better loading state (including Head)
-  if (status === "loading") {
+  if (status !== "authenticated") {
     return <p>Loading...</p>;
   }
 
+  // Only show directory if confirmed authenticated
   return (
     <>
       <Head>

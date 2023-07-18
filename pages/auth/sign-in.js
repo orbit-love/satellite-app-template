@@ -23,14 +23,14 @@ export default function SignIn({ csrfToken }) {
         >
           <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
 
-          <label for="email-address" className="sr-only">
+          <label htmlFor="email-address" className="sr-only">
             Email address
           </label>
           <input
             id="email-address"
             name="email"
             type="email"
-            autocomplete="email"
+            autoComplete="email"
             required
             className="bg-white/5 ring-white/10 flex-auto py-3.5 px-5 min-w-0 text-lg text-gray-900 rounded-md border border-gray-100 ring-1 ring-inset shadow-sm focus:ring-2 focus:ring-inset focus:ring-white sm:leading-6"
             placeholder="Enter your email"
