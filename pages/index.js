@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Layout from "../components/layout";
 
-export default function Home({ initialMembers, session }) {
+export default function Home({ initialMembers }) {
   const [members, setMembers] = useState(initialMembers);
   const [error, setError] = useState("");
 
@@ -20,7 +20,7 @@ export default function Home({ initialMembers, session }) {
   }
 
   return (
-    <Layout session={session}>
+    <Layout>
       <h1>Members</h1>
       {!!members && members.length > 0 ? (
         <ul>
