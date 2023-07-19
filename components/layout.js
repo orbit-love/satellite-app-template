@@ -1,9 +1,9 @@
 import React from "react";
-import Head from "next/head";
 import Login from "./login";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "./head";
 
 export default function Layout({ children }) {
   const { status } = useSession();
@@ -15,21 +15,13 @@ export default function Layout({ children }) {
   }, [status]);
 
   if (status !== "authenticated") {
-    return (
-      <Head>
-        <title>Member Directory</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-    );
+    return <Head />;
   }
 
   // Only show directory if confirmed authenticated
   return (
     <>
-      <Head>
-        <title>Member Directory</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Head />
 
       <Login />
 
