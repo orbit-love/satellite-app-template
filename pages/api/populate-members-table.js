@@ -11,13 +11,15 @@ export default async function handle(req, res) {
     return;
   }
 
-  const members = await fetchOrbitData();
+  const memberData = await fetchOrbitData();
 
   // Update or create members that are in Orbit but not Prisma
-  let prismaPromises = members.map(async (member) => upsertMember(member));
+  let prismaPromises = memberData.data.map(async (member) =>
+    upsertMember(member, memberData.included)
+  );
 
   // Destroy members that are in Prisma but not in Orbit
-  const removeList = await membersToRemove(members);
+  const removeList = await membersToRemove(memberData.data);
   prismaPromises.push(removeMembers(removeList));
 
   // Resolve requests
@@ -63,5 +65,5 @@ export async function fetchOrbitData() {
 
   const members = await response.json();
 
-  return members.data;
+  return members;
 }
