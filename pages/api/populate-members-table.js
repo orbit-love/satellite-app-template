@@ -13,6 +13,9 @@ export default async function handle(req, res) {
 
   const memberData = await fetchOrbitData();
 
+  // Delete all existing identities
+  await prisma.identity.deleteMany();
+
   // Update or create members that are in Orbit but not Prisma
   let prismaPromises = memberData.data.map(async (member) =>
     upsertMember(member, memberData.included)
