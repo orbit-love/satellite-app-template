@@ -13,6 +13,7 @@ export default function AuthLayout({ children }) {
     if (status === "authenticated") router.push("/");
   }, [status]);
 
+  // If user is anything other than explicitly unauthenticated (ie "loading"), show empty page
   if (status !== "unauthenticated") {
     return <Head />;
   }

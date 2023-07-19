@@ -14,6 +14,7 @@ export default function Layout({ children }) {
     if (status === "unauthenticated") router.push("/api/auth/signin");
   }, [status]);
 
+  // If user is anything other than explicitly authenticated (ie "loading"), show empty page
   if (status !== "authenticated") {
     return <Head />;
   }
