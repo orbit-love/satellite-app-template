@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Layout from "../components/layout";
+import MemberCard from "../components/member-card";
 
 export default function Home({ initialMembers }) {
   const [members, setMembers] = useState(initialMembers);
@@ -21,24 +22,36 @@ export default function Home({ initialMembers }) {
 
   return (
     <Layout>
-      <h1>Members</h1>
-      {!!members && members.length > 0 ? (
-        <ul>
-          {members.map((member) => (
-            <li key={member.id}>
-              <p>
-                {member.name} - {member.email}
-              </p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No members</p>
-      )}
-
       {!!error ? <p>{error}</p> : ""}
 
       <button onClick={refreshMembers}>Refresh</button>
+
+      <div class="px-6 py-24 mx-auto max-w-7xl bg-white sm:py-32 lg:px-8">
+        <section class="mx-auto max-w-2xl sm:text-center">
+          <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Meet other members
+          </h1>
+
+          <p class="mt-6 text-lg leading-8 text-gray-600">
+            Lorem ipsum we’re a dynamic group of individuals who are passionate
+            about what we do and dedicated to delivering the best results for
+            our clients.
+          </p>
+        </section>
+
+        {!!members && members.length > 0 ? (
+          <ul
+            role="list"
+            class="grid grid-cols-1 gap-x-6 gap-y-20 mt-20 mx-auto max-w-2xl sm:grid-cols-2 lg:gap-x-8 lg:max-w-4xl xl:max-w-none"
+          >
+            {members.map((member) => (
+              <MemberCard member={member} />
+            ))}
+          </ul>
+        ) : (
+          ""
+        )}
+      </div>
     </Layout>
   );
 }
