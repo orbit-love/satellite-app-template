@@ -47,6 +47,9 @@ export async function getAllMembers() {
     orderBy: {
       name: "asc",
     },
+    include: {
+      identities: true,
+    },
   });
 }
 

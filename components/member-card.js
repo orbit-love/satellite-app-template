@@ -1,10 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
 import IdentityLink from "./identity-link";
 
 export default function MemberCard({ member }) {
   return (
-    <li class="flex flex-col gap-6 xl:flex-row">
+    <li class="flex flex-col gap-6 xl:flex-row" key={member.id}>
       {/* We cannot use next/Image here since avatars are remotely loaded
           & we do not know the full list of sources for them */}
       <img
@@ -18,32 +16,15 @@ export default function MemberCard({ member }) {
           {member.name}
         </h2>
 
-        <section className="inline-flex gap-4 my-2">
-          {!!member.twitter_url ? (
-            <IdentityLink
-              url={member.twitter_url}
-              logo="/twitter-logo-blue.png"
-              alt=""
-            />
-          ) : (
-            <></>
-          )}
-
-          {!!member.linkedin_url ? (
-            <IdentityLink
-              url={member.linkedin_url}
-              logo="/linkedin-logo-blue.png"
-              alt=""
-            />
-          ) : (
-            <></>
-          )}
+        <section className="flex flex-col my-2 space-y-2">
+          {member.identities.map((identity) => (
+            <IdentityLink identity={identity} />
+          ))}
         </section>
 
         <p class="mt-6 text-base leading-7 text-gray-600">
           Quia illum aut in beatae. Possimus dolores aliquid accusantium aut in
-          ut non assumenda. Enim iusto molestias aut deleniti eos aliquid magnam
-          molestiae. At et non possimus ab. Magni labore molestiae nulla qui.
+          ut non assumenda.
         </p>
       </div>
     </li>
