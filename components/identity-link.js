@@ -26,6 +26,7 @@ export default function IdentityLink({ identity }) {
         width={30}
         height={30}
         alt={identity.type.replace("_", " ")}
+        className="w-auto h-8"
       />
 
       <span className="text-lg text-gray-600">@{identity.username}</span>
