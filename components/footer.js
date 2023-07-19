@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="flex justify-center items-center mx-auto max-w-7xl h-24 text-gray-600 border-t border-gray-100 dark:text-gray-200 dark:border-gray-700">
+    <footer className="flex justify-center items-center mt-16 mx-auto max-w-7xl h-24 text-gray-600 border-t border-gray-100 dark:text-gray-200 dark:border-gray-700">
       <Link
         href="https://orbit.love/"
         className="inline-flex gap-1 items-center"
