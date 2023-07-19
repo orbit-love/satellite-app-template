@@ -5,10 +5,10 @@ export default function IdentityLink({ identity }) {
   let logo;
   switch (identity.type) {
     case "twitter_identity":
-      logo = "/twitter-logo-blue.png";
+      logo = "/twitter-icon-blue.png";
       break;
     case "linkedin_identity":
-      logo = "/linkedin-logo-blue.png";
+      logo = "/linkedin-icon-blue.png";
       break;
     default:
       break;

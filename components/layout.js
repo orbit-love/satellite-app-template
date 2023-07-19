@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Head from "./head";
 import Link from "next/link";
 import Image from "next/image";
+import Footer from "./footer";
 
 export default function Layout({ children }) {
   const { status } = useSession();
@@ -30,7 +31,7 @@ export default function Layout({ children }) {
         <div className="flex lg:flex-1">
           <Image
             className="w-auto h-12"
-            src="/orbit-logo-purple.svg"
+            src="/orbit-icon-purple.svg"
             alt="Orbit"
             width={50}
             height={50}
@@ -44,23 +45,7 @@ export default function Layout({ children }) {
 
       <main>{children}</main>
 
-      <footer className="flex justify-center items-center mx-auto max-w-7xl h-24 text-gray-600 border-t border-gray-100">
-        <Link
-          href="https://orbit.love/"
-          className="inline-flex gap-1 items-center py-1 px-2 bg-white rounded"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Powered by
-          <Image
-            src="/orbit-logo-color.png"
-            width={50}
-            height={50}
-            alt="Orbit"
-            className="w-auto h-6"
-          />
-        </Link>
-      </footer>
+      <Footer />
     </div>
   );
 }
