@@ -15,8 +15,16 @@ model Member {
   email String  @unique
   name  String?
   avatar_url  String?
-  linkedin_url String?
-  twitter_url String?
+  identities Identity[]
+}
+
+model Identity {
+  id       Int  @id @default(autoincrement())
+  member   Member @relation(fields: [memberId], references: [id])
+  memberId Int // relation scalar field  (used in the `@relation` attribute above)
+  type String
+  profile_url String
+  username String
 }
 
 model Account {
