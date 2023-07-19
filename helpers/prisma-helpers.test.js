@@ -1,8 +1,8 @@
-import prisma from "../db";
+import prisma from "../lib/db";
 import { getAllMemberEmails } from "./prisma-helpers";
 
 // mock the Prisma client
-jest.mock("../db", () => ({
+jest.mock("../lib/db", () => ({
   member: {
     findMany: jest.fn(),
   },

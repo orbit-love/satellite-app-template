@@ -1,17 +1,17 @@
+const SUPPORTED_IDENTITIY_TYPES = ["twitter_identity", "linkedin_identity"];
+
 /**
  * fetches the profile URLs for Twitter and LinkedIn from a member's identities
  *
  * @param {Object} member - the member object containing attributes & identity information, fetched from Orbit
  * @param {Array} included - an array of identity objects that may contain the member's identities, fetched from Orbit
- * @returns {Object} an object containing the profile URLs for Twitter and LinkedIn
+ * @returns {Array<Object>} an array containing information needed to create identities for this member
  */
 export function fetchIdentities(member, included) {
   const identities = member.relationships.identities.data;
-
-  const identityTypes = ["twitter_identity", "linkedin_identity"];
   const fetchedIdentities = [];
 
-  identityTypes.forEach((identityType) => {
+  SUPPORTED_IDENTITIY_TYPES.forEach((identityType) => {
     const identity = fetchIdentity(identityType, identities, included);
 
     // Only add identities to the array to be returned if they exist

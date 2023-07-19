@@ -1,7 +1,7 @@
 import { membersToRemove } from "./populate-members-table";
-import { getAllMemberEmails } from "../../lib/helpers/prisma-helpers";
+import { getAllMemberEmails } from "../../helpers/prisma-helpers";
 
-jest.mock("../../lib/helpers/prisma-helpers", () => ({
+jest.mock("../../helpers/prisma-helpers", () => ({
   getAllMemberEmails: jest.fn(),
 }));
 

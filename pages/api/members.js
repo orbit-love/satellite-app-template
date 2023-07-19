@@ -1,5 +1,5 @@
 import prisma from "../../lib/db";
-import { getAllMembers } from "../../lib/helpers/prisma-helpers";
+import { getAllMembers } from "../../helpers/prisma-helpers";
 
 export default async function handle(req, res) {
   try {

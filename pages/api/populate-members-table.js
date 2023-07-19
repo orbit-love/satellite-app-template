@@ -3,7 +3,7 @@ import {
   removeMembers,
   getAllMembers,
   getAllMemberEmails,
-} from "../../lib/helpers/prisma-helpers";
+} from "../../helpers/prisma-helpers";
 
 export default async function handle(req, res) {
   if (req.method !== "POST") {

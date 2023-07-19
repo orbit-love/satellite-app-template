@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
-import { getAllMemberEmails } from "../../../lib/helpers/prisma-helpers";
+import { getAllMemberEmails } from "../../../helpers/prisma-helpers";
 
 const prisma = new PrismaClient();
 
