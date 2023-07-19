@@ -38,20 +38,22 @@ export default function VerifyRequest() {
   return (
     <AuthLayout>
       {router.isReady ? (
-        <div className="isolate relative px-6 py-32 mt-14 mx-auto max-w-2xl text-center sm:py-48 lg:px-8 lg:py-56">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+        <>
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl dark:text-white">
             {title}
           </h1>
 
-          <p className="mt-6 text-xl leading-8 text-gray-600">{preamble}</p>
+          <p className="mt-6 text-xl leading-8 text-gray-600 dark:text-gray-200">
+            {preamble}
+          </p>
 
           <Link
             href="/auth/sign-in"
-            className="flex-none py-3.5 px-5 mt-6 text-lg font-semibold text-white bg-purple-500 rounded-md shadow-sm hover:bg-purple-600 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline focus-visible:outline-offset-2"
+            className="inline-block flex-none py-3.5 px-5 mt-6 text-lg font-semibold text-white bg-purple-500 rounded-md shadow-sm hover:bg-purple-600 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline focus-visible:outline-offset-2"
           >
             Back to login
           </Link>
-        </div>
+        </>
       ) : (
         ""
       )}

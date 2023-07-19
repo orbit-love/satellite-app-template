@@ -23,10 +23,10 @@ export default function Layout({ children }) {
 
   // Only show directory if confirmed authenticated
   return (
-    <>
+    <div className="bg-white dark:bg-gray-900">
       <Head />
 
-      <header className="flex gap-x-6 justify-between items-center p-6 mx-auto max-w-7xl bg-white lg:px-8">
+      <header className="flex gap-x-6 justify-between items-center p-6 mx-auto max-w-7xl lg:px-8">
         <div className="flex lg:flex-1">
           <Image
             className="w-auto h-12"
@@ -44,10 +44,10 @@ export default function Layout({ children }) {
 
       <main>{children}</main>
 
-      <footer className="flex justify-center items-center mx-auto max-w-7xl h-24 text-gray-700 border-t border-gray-100">
+      <footer className="flex justify-center items-center mx-auto max-w-7xl h-24 text-gray-600 border-t border-gray-100">
         <Link
           href="https://orbit.love/"
-          className="inline-flex gap-1 items-center"
+          className="inline-flex gap-1 items-center py-1 px-2 bg-white rounded"
           target="_blank"
           rel="noreferrer noopener"
         >
@@ -61,6 +61,6 @@ export default function Layout({ children }) {
           />
         </Link>
       </footer>
-    </>
+    </div>
   );
 }

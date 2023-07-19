@@ -12,7 +12,7 @@ export default function MemberCard({ member }) {
       />
 
       <div className="flex-auto">
-        <h2 className="text-xl font-semibold tracking-tight leading-8 text-gray-900">
+        <h2 className="text-xl font-semibold tracking-tight leading-8 text-gray-900 dark:text-white">
           {member.name}
         </h2>
 
@@ -22,7 +22,7 @@ export default function MemberCard({ member }) {
           ))}
         </section>
 
-        <p className="mt-6 text-base leading-7 text-gray-600">
+        <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-200">
           Quia illum aut in beatae. Possimus dolores aliquid accusantium aut in
           ut non assumenda.
         </p>
