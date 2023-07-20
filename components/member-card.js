@@ -1,6 +1,10 @@
+import { useSession } from "next-auth/react";
 import IdentityLink from "./identity-link";
+import Bio from "./bio";
 
 export default function MemberCard({ member }) {
+  const { data: session } = useSession();
+
   return (
     <li className="flex flex-col gap-6 xl:flex-row" key={member.id}>
       {/* We cannot use next/Image here since avatars are remotely loaded
@@ -22,10 +26,7 @@ export default function MemberCard({ member }) {
           ))}
         </section>
 
-        <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-200">
-          Quia illum aut in beatae. Possimus dolores aliquid accusantium aut in
-          ut non assumenda.
-        </p>
+        <Bio editable={member.email === session?.user.email} bio={member.bio} />
       </div>
     </li>
   );
