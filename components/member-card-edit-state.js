@@ -1,7 +1,35 @@
-export default function MemberCardEditState({ setEditState }) {
+import { useState } from "react";
+
+export default function MemberCardEditState({ setEditState, member }) {
+  const [bio, setBio] = useState(member.bio);
+
+  const handleSubmit = async (event) => {
+    // Prevent the default form submission behavior so we don't redirect
+    event.preventDefault();
+
+    const response = await fetch("/api/update-member", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: member.id, bio }),
+    });
+
+    if (response.ok) {
+      // On successful response, set bio to new value & return to default view
+      member.bio = bio;
+      setEditState(false);
+    } else {
+      // On error....
+      console.error(`Error: ${response.status}`);
+    }
+  };
+
   return (
     <div className="flex-auto">
-      <form method="post" action="/api/update-member">
+      <form method="post" onSubmit={handleSubmit}>
+        <input name="id" type="hidden" defaultValue={member.id} />
+
         <label
           htmlFor="bio"
           className="text-xl font-semibold tracking-tight leading-8 text-gray-900 dark:text-white"
@@ -20,8 +48,11 @@ export default function MemberCardEditState({ setEditState }) {
           id="bio"
           className="block py-1.5 px-2 mb-2 w-full text-gray-900 rounded-md border-0 ring-1 ring-inset ring-gray-300 shadow-sm focus:ring-2 focus:ring-inset focus:ring-indigo-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
           placeholder="Hi, I'm Delete..."
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
         ></textarea>
 
+        {/* Rendering buttons with flex-row-reverse so "submit" comes up first for screenreaders */}
         <section className="inline-flex flex-row-reverse gap-2 w-full">
           <button
             type="submit"

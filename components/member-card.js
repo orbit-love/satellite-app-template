@@ -16,7 +16,7 @@ export default function MemberCard({ member, editable }) {
       />
 
       {editState ? (
-        <MemberCardEditState setEditState={setEditState} />
+        <MemberCardEditState setEditState={setEditState} member={member} />
       ) : (
         <div className="relative flex-auto">
           <h2 className="text-xl font-semibold tracking-tight leading-8 text-gray-900 dark:text-white">
