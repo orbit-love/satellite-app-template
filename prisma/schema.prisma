@@ -16,6 +16,7 @@ model Member {
   name  String?
   avatar_url  String?
   identities Identity[]
+  admin Boolean @default(false)
 }
 
 model Identity {
