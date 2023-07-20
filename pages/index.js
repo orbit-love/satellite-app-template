@@ -1,31 +1,13 @@
 import { useState } from "react";
 import Layout from "../components/layout";
 import MemberCard from "../components/member-card";
+import AdminControls from "../components/admin-controls";
 
 export default function Home({ initialMembers }) {
   const [members, setMembers] = useState(initialMembers);
-  const [error, setError] = useState("");
-
-  async function refreshMembers() {
-    const res = await fetch("/api/populate-members-table", { method: "POST" });
-
-    if (res.ok) {
-      const data = await res.json();
-
-      setMembers(data.members);
-    } else {
-      setError(
-        "There was a problem syncing the members! Please verify your workspace slug & API key are set correctly in the environment variables."
-      );
-    }
-  }
 
   return (
     <Layout>
-      {!!error ? <p>{error}</p> : ""}
-
-      <button onClick={refreshMembers}>Refresh</button>
-
       <div className="px-6 py-24 mx-auto max-w-7xl sm:py-32 lg:px-8">
         <section className="mx-auto max-w-2xl sm:text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
@@ -38,6 +20,8 @@ export default function Home({ initialMembers }) {
             Step in, join the dialogue, and explore the community!
           </p>
         </section>
+
+        <AdminControls setMembers={setMembers} />
 
         {!!members && members.length > 0 ? (
           <ul
@@ -56,6 +40,8 @@ export default function Home({ initialMembers }) {
   );
 }
 
+// Fetch members from /api/members route on component load (ie, initialise the data)
+// This is set as default value for the useState for members
 export async function getServerSideProps(context) {
   const res = await fetch(`http://${context.req.headers.host}/api/members`);
   const data = await res.json();
