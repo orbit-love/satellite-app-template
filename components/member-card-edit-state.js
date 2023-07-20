@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Error from "./error";
+import RevokeAccess from "./revoke-access";
 
 export default function MemberCardEditState({ setEditState, member }) {
   const [bio, setBio] = useState(member.bio);
@@ -75,6 +76,8 @@ export default function MemberCardEditState({ setEditState, member }) {
             Cancel
           </button>
         </section>
+
+        <RevokeAccess setError={setError} />
       </form>
     </div>
   );
