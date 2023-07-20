@@ -16,6 +16,7 @@ model Member {
   name  String?
   avatar_url  String?
   identities Identity[]
+  bio String? @db.VarChar(175)
 }
 
 model Identity {
