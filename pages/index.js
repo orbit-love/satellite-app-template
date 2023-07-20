@@ -3,23 +3,6 @@ import Layout from "../components/layout";
 import MemberCard from "../components/member-card";
 import AdminControls from "../components/admin-controls";
 
-// Fetch members from /api/members route on component load (ie, initialise the data)
-// This is set as default value for the useState for members
-export async function getServerSideProps(context) {
-  const res = await fetch(`http://${context.req.headers.host}/api/members`);
-  const data = await res.json();
-
-  if (!data) {
-    return {
-      props: { initialMembers: [] },
-    };
-  }
-
-  return {
-    props: { initialMembers: data },
-  };
-}
-
 export default function Home({ initialMembers }) {
   const [members, setMembers] = useState(initialMembers);
 
@@ -55,4 +38,21 @@ export default function Home({ initialMembers }) {
       </div>
     </Layout>
   );
+}
+
+// Fetch members from /api/members route on component load (ie, initialise the data)
+// This is set as default value for the useState for members
+export async function getServerSideProps(context) {
+  const res = await fetch(`http://${context.req.headers.host}/api/members`);
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      props: { initialMembers: [] },
+    };
+  }
+
+  return {
+    props: { initialMembers: data },
+  };
 }
