@@ -1,10 +1,9 @@
 import React from "react";
-import Login from "./login";
+import Signout from "./signout";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "./head";
-import Link from "next/link";
 import Image from "next/image";
 import Footer from "./footer";
 
@@ -39,7 +38,7 @@ export default function Layout({ children }) {
         </div>
 
         <div className="flex flex-1 gap-x-6 justify-end items-center">
-          <Login />
+          <Signout />
         </div>
       </header>
 
