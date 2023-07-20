@@ -1,7 +1,10 @@
 import IdentityLink from "./identity-link";
-import Bio from "./bio";
+import { useState } from "react";
+import MemberCardEditState from "./member-card-edit-state";
 
-export default function MemberCard({ member }) {
+export default function MemberCard({ member, editable }) {
+  const [editState, setEditState] = useState(false);
+
   return (
     <li className="flex flex-col gap-6 xl:flex-row" key={member.id}>
       {/* We cannot use next/Image here since avatars are remotely loaded
@@ -12,19 +15,31 @@ export default function MemberCard({ member }) {
         alt=""
       />
 
-      <div className="flex-auto">
-        <h2 className="text-xl font-semibold tracking-tight leading-8 text-gray-900 dark:text-white">
-          {member.name}
-        </h2>
+      {editState ? (
+        <MemberCardEditState />
+      ) : (
+        <div className="flex-auto">
+          <h2 className="text-xl font-semibold tracking-tight leading-8 text-gray-900 dark:text-white">
+            {member.name}
+          </h2>
 
-        <section className="flex flex-col my-2 space-y-2">
-          {member.identities.map((identity) => (
-            <IdentityLink identity={identity} key={identity.id} />
-          ))}
-        </section>
+          <section className="flex flex-col my-2 space-y-2">
+            {member.identities.map((identity) => (
+              <IdentityLink identity={identity} key={identity.id} />
+            ))}
+          </section>
 
-        <Bio />
-      </div>
+          <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-200">
+            {member.bio}
+          </p>
+
+          {editable ? (
+            <button onClick={() => setEditState(true)}>Edit me</button>
+          ) : (
+            <></>
+          )}
+        </div>
+      )}
     </li>
   );
 }

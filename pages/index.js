@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Layout from "../components/layout";
 import MemberCard from "../components/member-card";
-import MemberCardEditable from "../components/member-card-editable";
+import MemberCardEditable from "../components/member-card-edit-state";
 
 export default function Home({ initialMembers }) {
   const [members, setMembers] = useState(initialMembers);
@@ -47,13 +47,13 @@ export default function Home({ initialMembers }) {
             role="list"
             className="grid grid-cols-1 gap-x-6 gap-y-20 mt-20 mx-auto max-w-2xl sm:grid-cols-2 lg:gap-x-8 lg:max-w-4xl xl:max-w-none"
           >
-            {members.map((member) =>
-              member.email === session?.user.email ? (
-                <MemberCardEditable member={member} key={member.id} />
-              ) : (
-                <MemberCard member={member} key={member.id} />
-              )
-            )}
+            {members.map((member) => (
+              <MemberCard
+                member={member}
+                editable={member.email === session?.user.email}
+                key={member.id}
+              />
+            ))}
           </ul>
         ) : (
           ""
