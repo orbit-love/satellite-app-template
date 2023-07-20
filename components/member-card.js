@@ -16,9 +16,9 @@ export default function MemberCard({ member, editable }) {
       />
 
       {editState ? (
-        <MemberCardEditState />
+        <MemberCardEditState setEditState={setEditState} />
       ) : (
-        <div className="flex-auto">
+        <div className="relative flex-auto">
           <h2 className="text-xl font-semibold tracking-tight leading-8 text-gray-900 dark:text-white">
             {member.name}
           </h2>
@@ -34,7 +34,12 @@ export default function MemberCard({ member, editable }) {
           </p>
 
           {editable ? (
-            <button onClick={() => setEditState(true)}>Edit me</button>
+            <button
+              onClick={() => setEditState(true)}
+              className="inline-block absolute top-0 right-0 py-1.5 px-2 text-gray-900 bg-gray-200 rounded-md shadow-sm hover:bg-gray-300 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline focus-visible:outline-offset-2"
+            >
+              Edit
+            </button>
           ) : (
             <></>
           )}
