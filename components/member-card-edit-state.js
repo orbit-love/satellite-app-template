@@ -24,10 +24,11 @@ export default function MemberCardEditState({ setEditState, member }) {
       setEditState(false);
       setError("");
     } else {
-      // On error....
-      setError(
-        "Something went wrong! Please ensure your bio is fewer than 175 characters."
-      );
+      if (response.status === 400) {
+        setError("Please ensure your bio is fewer than 175 characters.");
+      } else {
+        setError("Something went wrong!");
+      }
     }
   };
 

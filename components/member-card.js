@@ -7,8 +7,11 @@ export default function MemberCard({ member, editable }) {
 
   return (
     <li className="flex flex-col gap-6 xl:flex-row" key={member.id}>
-      {/* We cannot use next/Image here since avatars are remotely loaded
-          & we do not know the full list of sources for them */}
+      {/* We cannot use next/Image here since avatars are remotely loaded.
+          Loading remote images with next requires you to list valid URL
+          patterns in your next.config.js, and we do not control the source
+          of member profile image URLs.
+          */}
       <img
         className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover max-h-72"
         src={member.avatar_url}
