@@ -89,11 +89,9 @@ export async function getAllMembers() {
  *
  * @returns {Promise} a Promise that resolves with an array of all member emails
  */
-export async function getAllMemberEmails() {
+export async function getAllMemberEmails(additionalClause) {
   const allEmails = await prisma.member.findMany({
-    where: {
-      admin: false,
-    },
+    ...additionalClause,
     select: {
       email: true,
     },

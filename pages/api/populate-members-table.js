@@ -41,7 +41,11 @@ export default async function handle(req, res) {
  * @returns {Promise} a Promise that resolves with an array of emails of members to be removed
  */
 export async function membersToRemove(orbitMembers) {
-  const prismaMemberEmails = await getAllMemberEmails();
+  const prismaMemberEmails = await getAllMemberEmails({
+    where: {
+      admin: false,
+    },
+  });
   const orbitMemberEmails = orbitMembers.map(
     (member) => member.attributes.email
   );
