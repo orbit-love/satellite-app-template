@@ -7,7 +7,8 @@ import {
 
 export default async function handle(req, res) {
   if (req.method !== "POST") {
-    res.status(405).send({ message: "Only POST requests permitted" });
+    console.error("Only POST requests permitted");
+    res.status(405).send();
     return;
   }
 

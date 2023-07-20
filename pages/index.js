@@ -2,9 +2,11 @@ import { useState } from "react";
 import Layout from "../components/layout";
 import MemberCard from "../components/member-card";
 import AdminControls from "../components/admin-controls";
+import { useSession } from "next-auth/react";
 
 export default function Home({ initialMembers }) {
   const [members, setMembers] = useState(initialMembers);
+  const { data: session } = useSession();
 
   return (
     <Layout>
@@ -29,7 +31,11 @@ export default function Home({ initialMembers }) {
             className="grid grid-cols-1 gap-x-6 gap-y-20 mt-20 mx-auto max-w-2xl sm:grid-cols-2 lg:gap-x-8 lg:max-w-4xl xl:max-w-none"
           >
             {members.map((member) => (
-              <MemberCard member={member} key={member.id} />
+              <MemberCard
+                member={member}
+                editable={member.email === session?.user.email}
+                key={member.id}
+              />
             ))}
           </ul>
         ) : (
