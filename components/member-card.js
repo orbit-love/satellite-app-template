@@ -10,7 +10,7 @@ export default function MemberCard({ member, editable }) {
       {/* We cannot use next/Image here since avatars are remotely loaded
           & we do not know the full list of sources for them */}
       <img
-        className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover"
+        className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover max-h-72"
         src={member.avatar_url}
         alt=""
       />
