@@ -16,6 +16,20 @@ export const authOptions = {
 
       return validEmails.includes(user.email);
     },
+    async session({ session, user }) {
+      // Find signed in member
+      const member = await prisma.member.findUnique({
+        where: {
+          email: user.email,
+        },
+      });
+
+      // Set admin flags on session
+      if (member) {
+        session.user.admin = member.admin;
+      }
+      return session;
+    },
   },
   pages: {
     signIn: "/auth/sign-in",
