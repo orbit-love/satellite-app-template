@@ -1,6 +1,37 @@
 import prisma from "../lib/db";
 import { fetchIdentities } from "./member-helpers";
 
+const PERMITTED_PARAMS = ["bio"];
+
+/**
+ * updates a member's details in the database, filtering the input data
+ * to include only the permitted parameters
+ *
+ * @param {Object} body - the data to update the member with
+ * @param {string} body.id - the id of the member to be updated
+ * @param {string} [body.bio] - the member's bio
+ * @returns {Promise} a promise that resolves to the updated member
+ *
+ */
+export async function updateMember(body) {
+  // We want to limit the params that Prisma accepts, similar to strong params in Rails
+  let filteredBody = {};
+
+  // Iterate over each property in body
+  for (let param in body) {
+    // If the parameter is in the list of allowed parameters, add it to filteredBody
+    if (PERMITTED_PARAMS.includes(param)) {
+      filteredBody[param] = body[param];
+    }
+  }
+
+  // Now pass filteredBody to Prisma
+  return prisma.member.update({
+    where: { id: parseInt(body.id) },
+    data: filteredBody,
+  });
+}
+
 /**
  * upsert a member in the database
  * if a member with the same email already exists, the name will be updated
