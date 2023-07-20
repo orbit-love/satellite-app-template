@@ -54,15 +54,17 @@ export async function getAllMembers() {
 }
 
 /**
- * fetch just the emails of all members from the database
+ * fetch just the emails of all non-admin members from the database
  *
  * @returns {Promise} a Promise that resolves with an array of all member emails
  */
 export async function getAllMemberEmails() {
   const allEmails = await prisma.member.findMany({
+    where: {
+      admin: false,
+    },
     select: {
       email: true,
-      // TODO: Add check for admin field here so we don't remove admins
     },
   });
 
