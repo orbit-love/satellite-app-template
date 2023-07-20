@@ -1,7 +1,9 @@
 import { useState } from "react";
+import Error from "./error";
 
 export default function MemberCardEditState({ setEditState, member }) {
   const [bio, setBio] = useState(member.bio);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     // Prevent the default form submission behavior so we don't redirect
@@ -19,9 +21,12 @@ export default function MemberCardEditState({ setEditState, member }) {
       // On successful response, set bio to new value & return to default view
       member.bio = bio;
       setEditState(false);
+      setError("");
     } else {
       // On error....
-      console.error(`Error: ${response.status}`);
+      setError(
+        "Something went wrong! Please ensure your bio is fewer than 175 characters."
+      );
     }
   };
 
@@ -51,6 +56,8 @@ export default function MemberCardEditState({ setEditState, member }) {
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         ></textarea>
+
+        {!!error ? <Error message={error} /> : ""}
 
         {/* Rendering buttons with flex-row-reverse so "submit" comes up first for screenreaders */}
         <section className="inline-flex flex-row-reverse gap-2 w-full">

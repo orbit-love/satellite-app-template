@@ -19,7 +19,7 @@ export default function IdentityLink({ identity }) {
       href={identity.profile_url}
       target="_blank"
       rel="noreferrer noopener"
-      className="block inline-flex gap-2 items-center"
+      className="block inline-flex gap-2 items-center w-min"
     >
       <Image
         src={logo}
