@@ -1,7 +1,10 @@
 import IdentityLink from "./identity-link";
 import Bio from "./bio";
+import { useState } from "react";
 
-export default function MemberCard({ member }) {
+export default function MemberCardEditable({ member }) {
+  const [editState, setEditState] = useState(false);
+
   return (
     <li className="flex flex-col gap-6 xl:flex-row" key={member.id}>
       {/* We cannot use next/Image here since avatars are remotely loaded
@@ -15,6 +18,7 @@ export default function MemberCard({ member }) {
       <div className="flex-auto">
         <h2 className="text-xl font-semibold tracking-tight leading-8 text-gray-900 dark:text-white">
           {member.name}
+          Edit state!
         </h2>
 
         <section className="flex flex-col my-2 space-y-2">
