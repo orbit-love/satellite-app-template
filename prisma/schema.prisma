@@ -17,6 +17,7 @@ model Member {
   avatar_url  String?
   identities Identity[]
   bio String? @db.VarChar(175)
+  admin Boolean @default(false)
 }
 
 model Identity {
