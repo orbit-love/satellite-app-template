@@ -61,15 +61,23 @@ export async function membersToRemove(orbitMembers) {
  * @returns {Promise} a Promise that resolves with an array of member objects
  */
 export async function fetchOrbitData() {
-  const response = await fetch(
-    "https://app.orbit.love/api/v1/delete44/members?identity=email",
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.API_KEY}`,
-        "Content-Type": "application/json",
-      },
-    }
+  const url = new URL(
+    `https://app.orbit.love/api/v1/${process.env.WORKSPACE_SLUG}/members`
   );
+
+  const params = new URLSearchParams({
+    identity: "email",
+    member_tags: process.env.ORBIT_TAG,
+  });
+
+  url.search = params.toString();
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_KEY}`,
+      "Content-Type": "application/json",
+    },
+  });
 
   const members = await response.json();
 
