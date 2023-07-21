@@ -24,7 +24,7 @@ export default function AdminControls({ setMembers }) {
   if (!session?.user.admin) return;
 
   return (
-    <section className="py-4 px-6 mt-20 rounded border border-gray-300 dark:border-gray-100">
+    <section className="py-4 px-6 mt-20 mx-auto max-w-6xl rounded border border-gray-300 dark:border-gray-100">
       <h2 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl dark:text-white">
         Admin Controls
       </h2>

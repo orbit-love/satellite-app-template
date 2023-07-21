@@ -10,7 +10,7 @@ export default function Home({ initialMembers }) {
 
   return (
     <Layout>
-      <div className="px-6 py-24 mx-auto max-w-7xl sm:py-32 lg:px-8">
+      <div className="px-6 py-24 mx-auto max-w-[80%] sm:py-32 lg:px-8">
         <section className="mx-auto max-w-2xl sm:text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
             Meet other members
@@ -28,7 +28,7 @@ export default function Home({ initialMembers }) {
         {!!members && members.length > 0 ? (
           <ul
             role="list"
-            className="grid grid-cols-1 gap-x-6 gap-y-20 mt-20 mx-auto max-w-2xl sm:grid-cols-2 lg:gap-x-8 lg:max-w-4xl xl:max-w-none"
+            className="grid grid-cols-1 gap-x-6 gap-y-20 mt-20 mx-auto max-w-2xl sm:grid-cols-2 lg:gap-x-10 lg:max-w-6xl xl:max-w-none 2xl:grid-cols-3"
           >
             {members.map((member) => (
               <MemberCard
