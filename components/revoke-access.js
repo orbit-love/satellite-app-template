@@ -1,14 +1,14 @@
-export default function RevokeAccess({ setError }) {
+export default function RevokeAccess({ id, setError }) {
   const handleSubmit = async (event) => {
     // Prevent the default form submission behavior so we don't redirect
     event.preventDefault();
 
-    const response = await fetch("/api/update-member", {
+    const response = await fetch("/api/revoke-access-for-member", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({ id: id, visible: false }),
     });
 
     if (response.ok) {
@@ -22,9 +22,10 @@ export default function RevokeAccess({ setError }) {
   };
 
   return (
-    <section>
+    <form method="post" onSubmit={handleSubmit}>
+      <input name="id" type="hidden" defaultValue={id} />
       <button
-        onClick={handleSubmit}
+        type="submit"
         className="inline-block flex-none py-2.5 px-3 mt-6 w-full text-white bg-red-700 rounded-md shadow-sm hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline focus-visible:outline-offset-2"
       >
         Remove yourself from directory
@@ -34,6 +35,6 @@ export default function RevokeAccess({ setError }) {
         This will remove your profile from this directory, and consequently
         prevent you from accessing the directory in the future.
       </small>
-    </section>
+    </form>
   );
 }

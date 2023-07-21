@@ -3,7 +3,7 @@ import Error from "./error";
 import RevokeAccess from "./revoke-access";
 
 export default function MemberCardEditState({ setEditState, member }) {
-  const [bio, setBio] = useState(member.bio);
+  const [bio, setBio] = useState(member.bio || "");
   const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
@@ -77,9 +77,9 @@ export default function MemberCardEditState({ setEditState, member }) {
             Cancel
           </button>
         </section>
-
-        <RevokeAccess setError={setError} />
       </form>
+
+      <RevokeAccess setError={setError} id={member.id} />
     </div>
   );
 }
