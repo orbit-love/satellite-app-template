@@ -1,3 +1,5 @@
+import { signOut } from "next-auth/react";
+
 export default function RevokeAccess({ id, setError }) {
   const handleSubmit = async (event) => {
     // Prevent the default form submission behavior so we don't redirect
@@ -13,6 +15,7 @@ export default function RevokeAccess({ id, setError }) {
 
     if (response.ok) {
       // On successful response, redirect to goodbye page
+      signOut({ callbackUrl: "/auth/goodbye" });
     } else {
       // On error....
       setError(
