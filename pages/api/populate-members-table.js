@@ -68,7 +68,7 @@ export async function membersToRemove(orbitMembers) {
  *                            each of which is an array of objects retrieved from the API
  */
 export async function fetchOrbitData(
-  url = `https://app.orbit.love/api/v1/${process.env.WORKSPACE_SLUG}/members?identity=email&member_tags=${process.env.ORBIT_TAG}&items=1`,
+  url = `https://app.orbit.love/api/v1/${process.env.WORKSPACE_SLUG}/members?identity=email&member_tags=${process.env.ORBIT_TAG}`,
   members = [],
   included = []
 ) {
