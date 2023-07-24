@@ -13,20 +13,24 @@ export default function MemberCard({ member, editable }) {
 
   return (
     <li className="flex flex-col gap-6 xl:flex-row" key={member.id}>
-      {/*
-          To remote load images in Next you need to specify their source
-          in next.config.js -> images -> remotePatterns. Orbit avatar URLs
-          come from a number of different sources, so we're trying to catch
-          as many as possible by accepting the common sources.
-        */}
-      {!!imageError ? (
-        <div class="max-w-xs">
-          {session?.user.admin ? <Error message={imageError} /> : <></>}
+      {/* If there is an error or member has no avatar, show default square */}
+      {!!imageError || !member.avatar_url ? (
+        <div className="max-w-xs">
+          {/* If admin, show warning message as well */}
+          {session?.user.admin && !!imageError ? (
+            <Error message={imageError} />
+          ) : (
+            <></>
+          )}
           <div className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover max-h-72 bg-gray-100 dark:bg-gray-800"></div>
         </div>
       ) : (
         <Image
           className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover max-h-72"
+          // To remote load images in Next you need to specify their source
+          // in next.config.js -> images -> remotePatterns. Orbit avatar URLs
+          // come from a number of different sources, so we're trying to catch
+          // as many as possible by accepting the common sources.
           src={member.avatar_url}
           width={300}
           height={375}
