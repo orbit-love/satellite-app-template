@@ -15,10 +15,10 @@ afterEach(() => {
 
 describe("updateMember", () => {
   it("should filter out non-permitted params and update the member", async () => {
-    const mockMember = { id: "1", name: "John Doe", bio: "Old Bio" };
     const mockBody = {
       id: "1",
       bio: "New Bio",
+      visible: false,
       notPermittedParam: "Some value",
     };
 
@@ -29,7 +29,7 @@ describe("updateMember", () => {
     // Verify only permitted params included
     expect(prisma.member.update).toHaveBeenCalledWith({
       where: { id: parseInt(mockBody.id) },
-      data: { bio: mockBody.bio },
+      data: { bio: mockBody.bio, visible: mockBody.visible },
     });
   });
 

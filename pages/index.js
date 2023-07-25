@@ -30,13 +30,17 @@ export default function Home({ initialMembers }) {
             role="list"
             className="grid grid-cols-1 gap-x-6 gap-y-20 mt-20 mx-auto max-w-2xl sm:grid-cols-2 lg:gap-x-10 lg:max-w-6xl xl:max-w-none 2xl:grid-cols-3"
           >
-            {members.map((member) => (
-              <MemberCard
-                member={member}
-                editable={member.email === session?.user.email}
-                key={member.id}
-              />
-            ))}
+            {members.map((member) => {
+              // Only show members who are visible in directory
+              if (member.visible)
+                return (
+                  <MemberCard
+                    member={member}
+                    editable={member.email === session?.user.email}
+                    key={member.id}
+                  />
+                );
+            })}
           </ul>
         ) : (
           ""
