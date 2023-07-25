@@ -22,7 +22,7 @@ export default function LayoutAuthenticated({ children }) {
 
   // Only show directory if confirmed authenticated
   return (
-    <div className="bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Head />
       <Header />
 
