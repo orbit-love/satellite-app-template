@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Layout from "../components/layout";
+import LayoutAuthenticated from "../components/layout-authenticated";
 import MemberCard from "../components/member-card";
 import AdminControls from "../components/admin-controls";
 import { useSession } from "next-auth/react";
@@ -9,7 +9,7 @@ export default function Home({ initialMembers }) {
   const { data: session } = useSession();
 
   return (
-    <Layout>
+    <LayoutAuthenticated>
       <div className="px-6 py-24 mx-auto max-w-[80%] sm:py-32 lg:px-8">
         <section className="mx-auto max-w-2xl sm:text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
@@ -46,7 +46,7 @@ export default function Home({ initialMembers }) {
           ""
         )}
       </div>
-    </Layout>
+    </LayoutAuthenticated>
   );
 }
 

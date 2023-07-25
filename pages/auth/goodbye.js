@@ -1,8 +1,8 @@
-import AuthLayout from "./auth-layout";
+import LayoutUnauthenticated from "../../components/layout-unauthenticated";
 
 export default function VerifyRequest() {
   return (
-    <AuthLayout>
+    <LayoutUnauthenticated>
       <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl dark:text-white">
         Goodbye!
       </h1>
@@ -12,6 +12,6 @@ export default function VerifyRequest() {
         longer be able to sign in. If you change your mind, contact your
         community manager who will be able to re-add you!
       </p>
-    </AuthLayout>
+    </LayoutUnauthenticated>
   );
 }

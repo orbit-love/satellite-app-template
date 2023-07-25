@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AuthLayout from "./auth-layout";
+import LayoutUnauthenticated from "../../components/layout-unauthenticated";
 import { useRouter } from "next/router";
 
 export default function VerifyRequest() {
@@ -41,7 +41,7 @@ export default function VerifyRequest() {
   }
 
   return (
-    <AuthLayout>
+    <LayoutUnauthenticated>
       {router.isReady ? (
         <>
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl dark:text-white">
@@ -62,6 +62,6 @@ export default function VerifyRequest() {
       ) : (
         ""
       )}
-    </AuthLayout>
+    </LayoutUnauthenticated>
   );
 }

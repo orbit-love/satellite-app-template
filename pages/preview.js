@@ -11,22 +11,6 @@ export default function Preview({ initialMembers }) {
     <div className="bg-white dark:bg-gray-900">
       <Head />
 
-      <header className="flex gap-x-6 justify-between items-center p-6 mx-auto max-w-7xl lg:px-8">
-        <div className="flex lg:flex-1">
-          <Image
-            className="w-auto h-12"
-            src="/orbit-icon-purple.svg"
-            alt="Orbit"
-            width={50}
-            height={50}
-          />
-        </div>
-
-        <div className="flex flex-1 gap-x-6 justify-end items-center">
-          Sign in...
-        </div>
-      </header>
-
       <main className="px-6 py-24 mx-auto max-w-[80%] sm:py-32 lg:px-8">
         <section className="mx-auto max-w-2xl sm:text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
