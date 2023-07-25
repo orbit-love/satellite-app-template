@@ -33,6 +33,7 @@ describe("/api/initialise-admin-member", () => {
     const req = { method: "GET" };
 
     await handle(req, res);
+
     expect(res.status).toHaveBeenCalledWith(405);
     expect(res.send).toHaveBeenCalled();
   });
@@ -41,10 +42,10 @@ describe("/api/initialise-admin-member", () => {
     getAllMembers.mockResolvedValueOnce([
       { id: 1, email: "existing@member.com" },
     ]);
-
     const req = { method: "POST" };
 
     await handle(req, res);
+
     expect(res.status).toHaveBeenCalledWith(409);
     expect(res.send).toHaveBeenCalled();
   });
@@ -61,7 +62,18 @@ describe("/api/initialise-admin-member", () => {
     };
 
     await handle(req, res);
+
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({ id: 1, email: "root@user.com" });
+  });
+
+  it("responds with 500 when prisma query fails", async () => {
+    getAllMembers.mockRejectedValueOnce(new Error("Prisma Error"));
+    const req = { method: "POST" };
+
+    await handle(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.send).toHaveBeenCalled();
   });
 });
