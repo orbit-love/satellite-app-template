@@ -1,6 +1,6 @@
 import IdentityLink from "./identity-link";
 import { useState } from "react";
-import MemberCardEditState from "./member-card-edit-state";
+import MemberCardEditState from "./edit-state/member-card-edit-state";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import Error from "./error";

@@ -7,17 +7,18 @@ export default function VerifyRequest() {
   const router = useRouter();
   const { error } = router.query;
 
+  // If member shouldn't have access to the repository, show
+  // them the same screen as if they had signed in successfully
+  // - this is so we don't expose which emails are listed on the directory
+  if (error === "AccessDenied") {
+    router.replace("/auth/verify-request");
+  }
+
   let title, preamble;
 
   // Set relevant error message for each of the error types listed in
   // https://next-auth.js.org/configuration/pages#error-page
   switch (error) {
-    case "AccessDenied":
-      title = "Access denied";
-      preamble = `You don't have access to this directory.
-        If you believe this is an error, please contact your
-        community manager who will be able to resolve this.`;
-      break;
     case "Verification":
       title = "Invalid link";
       preamble =
