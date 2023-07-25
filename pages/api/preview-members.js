@@ -3,8 +3,13 @@ import { getAllMembers } from "../../helpers/prisma-helpers";
 
 export default async function handle(req, res) {
   try {
-    // TODO: Only fetch members shown in public preview
-    const members = await getAllMembers();
+    // Only fetch members shown in public preview
+    const members = await getAllMembers({
+      where: {
+        shownInPublicDirectory: true,
+        shownInDirectory: true,
+      },
+    });
 
     res.status(200).json(members);
   } catch (e) {

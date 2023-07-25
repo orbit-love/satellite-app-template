@@ -1,7 +1,7 @@
 import prisma from "../lib/db";
 import { fetchIdentities } from "./member-helpers";
 
-const PERMITTED_PARAMS = ["bio", "shownInDirectory"];
+const PERMITTED_PARAMS = ["bio", "shownInDirectory", "shownInPublicDirectory"];
 
 /**
  * updates a member's details in the database, filtering the input data
