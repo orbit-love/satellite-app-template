@@ -40,7 +40,7 @@ export default function RevokeAccess({ id, setError }) {
         Revoke Access
       </label>
 
-      <small className="block mb-6 text-gray-700 dark:text-gray-300">
+      <small className="block mb-2 text-gray-700 dark:text-gray-300">
         This will remove your profile from this directory, and consequently
         prevent you from accessing the directory in the future.
       </small>
@@ -58,7 +58,7 @@ export default function RevokeAccess({ id, setError }) {
         </div>
         <label
           htmlFor="confirm"
-          className="ml-3 leading-6 text-gray-700 dark:text-gray-300"
+          className="ml-3 leading-6 text-gray-900 dark:text-white"
         >
           I understand this will remove my listing & revoke my access to this
           directory

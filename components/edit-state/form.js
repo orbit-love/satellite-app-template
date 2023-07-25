@@ -86,7 +86,7 @@ export default function Form({ setEditState, member, setError }) {
         </div>
         <label
           htmlFor="shownInPublicDirectory"
-          className="ml-3 leading-6 text-gray-700 dark:text-gray-300"
+          className="ml-3 leading-6 text-gray-900 dark:text-white"
         >
           Show in public directory
         </label>
