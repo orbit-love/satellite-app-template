@@ -22,11 +22,11 @@ export default function MemberCard({ member, editable }) {
           ) : (
             <></>
           )}
-          <div className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover max-h-72 bg-gray-100 dark:bg-gray-800"></div>
+          <div className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover h-72 bg-gray-100 dark:bg-gray-800"></div>
         </div>
       ) : (
         <Image
-          className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover max-h-72"
+          className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover h-72"
           // To remote load images in Next you need to specify their source
           // in next.config.js -> images -> remotePatterns. Orbit avatar URLs
           // come from a number of different sources, so we're trying to catch

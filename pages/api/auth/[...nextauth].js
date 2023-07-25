@@ -14,7 +14,7 @@ export const authOptions = {
       // Ensure only users who are present in the directory can sign in
       const validEmails = await getAllMemberEmails({
         where: {
-          visible: true,
+          shownInDirectory: true,
         },
       });
 

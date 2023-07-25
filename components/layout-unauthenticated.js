@@ -2,10 +2,11 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import Head from "../../components/head";
-import Footer from "../../components/footer";
+import Head from "./head";
+import Footer from "./footer";
+import Header from "./header";
 
-export default function AuthLayout({ children }) {
+export default function LayoutUnauthenticated({ children }) {
   const { status } = useSession();
   const router = useRouter();
 
@@ -22,10 +23,9 @@ export default function AuthLayout({ children }) {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <Head />
+      <Header />
 
-      <main className="isolate relative px-6 py-48 mx-auto max-w-2xl text-center lg:px-8 lg:py-64">
-        {children}
-      </main>
+      <main>{children}</main>
 
       <Footer />
     </div>

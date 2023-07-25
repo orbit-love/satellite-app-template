@@ -15,7 +15,7 @@ export default function RevokeAccess({ id, setError }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: id, visible: false }),
+      body: JSON.stringify({ id: id, shownInDirectory: false }),
     });
 
     if (response.ok) {
@@ -40,7 +40,7 @@ export default function RevokeAccess({ id, setError }) {
         Revoke Access
       </label>
 
-      <small className="block mb-6 text-gray-700 dark:text-gray-300">
+      <small className="block mb-2 text-gray-700 dark:text-gray-300">
         This will remove your profile from this directory, and consequently
         prevent you from accessing the directory in the future.
       </small>
@@ -49,6 +49,7 @@ export default function RevokeAccess({ id, setError }) {
         <div className="flex items-center h-6">
           <input
             name="confirm"
+            id="confirm"
             type="checkbox"
             className="w-4 h-4 text-purple-500 rounded border-gray-300 focus:ring-purple-500"
             checked={isConfirmed}
@@ -57,7 +58,7 @@ export default function RevokeAccess({ id, setError }) {
         </div>
         <label
           htmlFor="confirm"
-          className="ml-3 leading-6 text-gray-700 dark:text-gray-300"
+          className="ml-3 leading-6 text-gray-900 dark:text-white"
         >
           I understand this will remove my listing & revoke my access to this
           directory

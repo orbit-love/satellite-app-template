@@ -18,7 +18,7 @@ describe("updateMember", () => {
     const mockBody = {
       id: "1",
       bio: "New Bio",
-      visible: false,
+      shownInDirectory: false,
       notPermittedParam: "Some value",
     };
 
@@ -29,12 +29,12 @@ describe("updateMember", () => {
     // Verify only permitted params included
     expect(prisma.member.update).toHaveBeenCalledWith({
       where: { id: parseInt(mockBody.id) },
-      data: { bio: mockBody.bio, visible: mockBody.visible },
+      data: { bio: mockBody.bio, shownInDirectory: mockBody.shownInDirectory },
     });
   });
 
   it("should handle the error when updating the member fails", async () => {
-    const mockBody = { id: "1", bio: "New Bio", visible: true };
+    const mockBody = { id: "1", bio: "New Bio", shownInDirectory: true };
 
     prisma.member.update.mockRejectedValue(
       new Error("Failed to update member")

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AuthLayout from "./auth-layout";
+import LayoutUnauthenticated from "../../components/layout-unauthenticated";
 import { useRouter } from "next/router";
 
 export default function VerifyRequest() {
@@ -29,6 +29,8 @@ export default function VerifyRequest() {
       preamble = `There's something wrong with the server configuration.
         Ensure you have set environment variables correctly & try again.`;
       break;
+    case undefined:
+      return;
     default:
       title = "Something went wrong";
       preamble =
@@ -37,9 +39,9 @@ export default function VerifyRequest() {
   }
 
   return (
-    <AuthLayout>
+    <LayoutUnauthenticated>
       {router.isReady ? (
-        <>
+        <div className="isolate relative px-6 py-48 mx-auto max-w-2xl text-center lg:px-8 lg:py-64">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl dark:text-white">
             {title}
           </h1>
@@ -54,10 +56,10 @@ export default function VerifyRequest() {
           >
             Back to login
           </Link>
-        </>
+        </div>
       ) : (
         ""
       )}
-    </AuthLayout>
+    </LayoutUnauthenticated>
   );
 }
