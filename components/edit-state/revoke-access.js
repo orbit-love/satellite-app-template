@@ -10,7 +10,7 @@ export default function RevokeAccess({ id, setError }) {
 
     if (!isConfirmed) return;
 
-    const response = await fetch("/api/revoke-access-for-member", {
+    const response = await fetch("/api/update-member", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

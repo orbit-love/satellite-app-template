@@ -1,4 +1,4 @@
-import handle from "./preview-members";
+import handle from "./members";
 import { getAllMembers } from "../../helpers/prisma-helpers";
 
 jest.mock("../../helpers/prisma-helpers", () => ({
@@ -11,7 +11,7 @@ const res = {
   json: jest.fn(),
 };
 
-describe("/api/preview-members", () => {
+describe("/api/members", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -27,13 +27,8 @@ describe("/api/preview-members", () => {
 
     await handle(req, res);
 
-    // Filters members to fetch
-    expect(getAllMembers).toHaveBeenCalledWith({
-      where: {
-        shownInPublicDirectory: true,
-        shownInDirectory: true,
-      },
-    });
+    // Fetches all members
+    expect(getAllMembers).toHaveBeenCalledWith();
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith(expectedMembers);
   });
