@@ -32,7 +32,7 @@ export default function Home({ initialMembers }) {
           >
             {members.map((member) => {
               // Only show members who are visible in directory
-              if (member.visible)
+              if (member.shownInDirectory)
                 return (
                   <MemberCard
                     member={member}

@@ -15,7 +15,7 @@ export default function RevokeAccess({ id, setError }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: id, visible: false }),
+      body: JSON.stringify({ id: id, shownInDirectory: false }),
     });
 
     if (response.ok) {

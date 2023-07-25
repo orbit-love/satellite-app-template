@@ -1,7 +1,7 @@
 import prisma from "../lib/db";
 import { fetchIdentities } from "./member-helpers";
 
-const PERMITTED_PARAMS = ["bio", "visible"];
+const PERMITTED_PARAMS = ["bio", "shownInDirectory"];
 
 /**
  * updates a member's details in the database, filtering the input data
@@ -73,8 +73,9 @@ export async function removeMembers(removeList) {
  *
  * @returns {Promise} a Promise that resolves with all members
  */
-export async function getAllMembers() {
+export async function getAllMembers(additionalClause) {
   return prisma.member.findMany({
+    ...additionalClause,
     orderBy: {
       name: "asc",
     },

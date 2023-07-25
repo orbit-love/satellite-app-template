@@ -18,7 +18,8 @@ model Member {
   identities Identity[]
   bio String? @db.VarChar(175)
   admin Boolean @default(false)
-  visible Boolean @default(true)
+  shownInDirectory Boolean @default(true)
+  shownInPublicDirectory Boolean @default(false)
 }
 
 model Identity {
