@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Signout from "./signout";
+import Signin from "./signin";
 
 export default function Header() {
   return (
@@ -16,8 +16,7 @@ export default function Header() {
       </div>
 
       <div className="flex flex-1 gap-x-6 justify-end items-center">
-        Sign in...
-        <Signout />
+        <Signin />
       </div>
     </header>
   );
