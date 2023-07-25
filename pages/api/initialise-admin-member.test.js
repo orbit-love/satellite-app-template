@@ -68,7 +68,7 @@ describe("/api/initialise-admin-member", () => {
   });
 
   it("responds with 500 when prisma query fails", async () => {
-    getAllMembers.mockRejectedValueOnce(new Error("Prisma Error"));
+    getAllMembers.mockRejectedValueOnce(new Error("Test Error"));
     const req = { method: "POST" };
 
     await handle(req, res);
