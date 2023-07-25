@@ -1,7 +1,10 @@
 import { useState } from "react";
 
-export default function EditBio({ setEditState, member, setError }) {
+export default function Form({ setEditState, member, setError }) {
   const [bio, setBio] = useState(member.bio || "");
+  const [shownInPublicDirectory, setShownInPublicDirectory] = useState(
+    member.shownInPublicDirectory
+  );
 
   const handleSubmit = async (event) => {
     // Prevent the default form submission behavior so we don't redirect
@@ -12,12 +15,15 @@ export default function EditBio({ setEditState, member, setError }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: member.id, bio }),
+      body: JSON.stringify({ id: member.id, bio, shownInPublicDirectory }),
     });
 
     if (response.ok) {
-      // On successful response, set bio to new value & return to default view
+      // On successful response, return to default view
+      // We manually set the updated fields so they update
+      // "automatically" once returning to the default view
       member.bio = bio;
+      member.shownInPublicDirectory = shownInPublicDirectory;
       setEditState(false);
       setError("");
     } else {
@@ -33,6 +39,7 @@ export default function EditBio({ setEditState, member, setError }) {
     <form method="post" onSubmit={handleSubmit}>
       <input name="id" type="hidden" defaultValue={member.id} />
 
+      {/* ---------- Edit bio field ---------- */}
       <label
         htmlFor="bio"
         className="tracking-tight leading-8 text-gray-900 dark:text-white"
@@ -54,6 +61,36 @@ export default function EditBio({ setEditState, member, setError }) {
         value={bio}
         onChange={(e) => setBio(e.target.value)}
       ></textarea>
+
+      {/* ---------- Show in public directory field ---------- */}
+      <p className="tracking-tight leading-8 text-gray-900 dark:text-white">
+        Public directory listing
+      </p>
+
+      <small className="block mb-2 text-gray-700 dark:text-gray-300">
+        This will show your name & profile picture on the public-facing page of
+        this directory. You can revoke access to this at any time by unchecking
+        this & hitting "Save".
+      </small>
+
+      <div className="flex relative items-start mb-6">
+        <div className="flex justify-center items-center h-6">
+          <input
+            name="shownInPublicDirectory"
+            id="shownInPublicDirectory"
+            type="checkbox"
+            className="w-4 h-4 text-purple-500 rounded border-gray-300 focus:ring-purple-500"
+            checked={shownInPublicDirectory}
+            onChange={(e) => setShownInPublicDirectory(e.target.checked)}
+          />
+        </div>
+        <label
+          htmlFor="shownInPublicDirectory"
+          className="ml-3 leading-6 text-gray-700 dark:text-gray-300"
+        >
+          Show in public directory
+        </label>
+      </div>
 
       {/* Rendering buttons with flex-row-reverse so "submit" comes up first for screenreaders */}
       <section className="inline-flex flex-row-reverse gap-2 w-full">

@@ -36,7 +36,10 @@ export default function Home({ initialMembers }) {
                 return (
                   <MemberCard
                     member={member}
-                    editable={member.email === session?.user.email}
+                    editable={
+                      member.email === session?.user.email ||
+                      session?.user.admin
+                    }
                     key={member.id}
                   />
                 );

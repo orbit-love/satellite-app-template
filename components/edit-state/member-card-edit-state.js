@@ -1,6 +1,6 @@
 import { useState } from "react";
 import RevokeAccess from "./revoke-access";
-import EditBio from "./edit-bio";
+import Form from "./form";
 import Error from "../error";
 
 export default function MemberCardEditState({ setEditState, member }) {
@@ -14,11 +14,7 @@ export default function MemberCardEditState({ setEditState, member }) {
 
       {!!error ? <Error message={error} /> : ""}
 
-      <EditBio
-        setEditState={setEditState}
-        member={member}
-        setError={setError}
-      />
+      <Form setEditState={setEditState} member={member} setError={setError} />
 
       <RevokeAccess setError={setError} id={member.id} />
     </div>

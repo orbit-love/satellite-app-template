@@ -38,7 +38,7 @@ export default function Preview({ initialMembers }) {
   );
 }
 
-// Fetch members from /api/members route on component load (ie, initialise the data)
+// Fetch members from /api/preview-members route on component load (ie, initialise the data)
 // This is set as default value for the useState for members
 export async function getServerSideProps(context) {
   const res = await fetch(
