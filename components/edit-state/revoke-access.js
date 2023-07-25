@@ -49,6 +49,7 @@ export default function RevokeAccess({ id, setError }) {
         <div className="flex items-center h-6">
           <input
             name="confirm"
+            id="confirm"
             type="checkbox"
             className="w-4 h-4 text-purple-500 rounded border-gray-300 focus:ring-purple-500"
             checked={isConfirmed}

@@ -16,6 +16,8 @@ export default function VerifyRequest() {
 
   let title, preamble;
 
+  console.log(error);
+
   // Set relevant error message for each of the error types listed in
   // https://next-auth.js.org/configuration/pages#error-page
   switch (error) {
@@ -29,6 +31,8 @@ export default function VerifyRequest() {
       preamble = `There's something wrong with the server configuration.
         Ensure you have set environment variables correctly & try again.`;
       break;
+    case undefined:
+      return;
     default:
       title = "Something went wrong";
       preamble =
