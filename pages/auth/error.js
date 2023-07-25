@@ -16,8 +16,6 @@ export default function VerifyRequest() {
 
   let title, preamble;
 
-  console.log(error);
-
   // Set relevant error message for each of the error types listed in
   // https://next-auth.js.org/configuration/pages#error-page
   switch (error) {
