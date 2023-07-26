@@ -35,7 +35,7 @@ function html(params) {
 
   const escapedHost = host.replace(/\./g, "&#8203;.");
 
-  const brandColor = theme.brandColor || "#6C4DF6";
+  const brandColor = theme.brandColor || "#B18A50";
   const color = {
     background: "#f9f9f9",
     text: "#1E2124",
