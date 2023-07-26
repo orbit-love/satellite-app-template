@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Form({ setEditState, member, setError }) {
+export default function Form({ setEditState, member, setError, setSuccess }) {
   const [bio, setBio] = useState(member.bio || "");
   const [shownInPublicDirectory, setShownInPublicDirectory] = useState(
     member.shownInPublicDirectory
@@ -24,9 +24,18 @@ export default function Form({ setEditState, member, setError }) {
       // "automatically" once returning to the default view
       member.bio = bio;
       member.shownInPublicDirectory = shownInPublicDirectory;
-      setEditState(false);
+
       setError("");
+      setSuccess(
+        `Updated. You are ${
+          shownInPublicDirectory ? "shown in" : "hidden from"
+        } the public directory.`
+      );
+
+      setEditState(false);
     } else {
+      setSuccess("");
+
       if (response.status === 400) {
         setError("Please ensure your bio is fewer than 175 characters.");
       } else {
