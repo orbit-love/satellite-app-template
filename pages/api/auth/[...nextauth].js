@@ -3,6 +3,7 @@ import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import { getAllMemberEmails } from "../../../helpers/prisma-helpers";
+import { sendVerificationRequest } from "../../../helpers/next-auth-helpers";
 
 const prisma = new PrismaClient();
 
@@ -18,7 +19,11 @@ export const authOptions = {
         },
       });
 
-      return validEmails.includes(user.email);
+      if (validEmails.includes(user.email)) return true;
+
+      // If user is not found, redirect to "verify request" page instead
+      // of error so we don't expose which members are in directory
+      return "/auth/verify-request";
     },
     async session({ session, user }) {
       // Find signed in member
@@ -53,6 +58,7 @@ export const authOptions = {
         },
       },
       from: process.env.SMTP_FROM,
+      sendVerificationRequest,
     }),
   ],
 };
