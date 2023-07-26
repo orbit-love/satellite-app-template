@@ -37,7 +37,7 @@ export default function AdminControls({ setMembers }) {
       <ul className="mt-3">
         <li className="flex inline-flex flex-col gap-4 items-center md:flex-row">
           <button
-            className="text-brand-light bg-brand-accent hover:bg-brand-accent-highlight focus-visible:outline-brand-accent-highlight py-2 px-3 min-w-fit text-base font-semibold rounded-md shadow-sm focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2"
+            className="text-white bg-brand-accent hover:bg-brand-accent-highlight focus-visible:outline-brand-accent-highlight py-2 px-3 min-w-fit text-base font-semibold rounded-md shadow-sm focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2"
             onClick={refreshMembers}
           >
             Sync Members

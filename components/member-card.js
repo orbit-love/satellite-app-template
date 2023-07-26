@@ -47,7 +47,7 @@ export default function MemberCard({ member, editable }) {
         <MemberCardEditState setEditState={setEditState} member={member} />
       ) : (
         <div className="relative flex-auto">
-          <h2 className="text-xl font-semibold tracking-tight leading-8 text-brand-dark dark:text-brand-light">
+          <h2 className="text-brand-dark dark:text-brand-light text-xl font-semibold tracking-tight leading-8">
             {member.name}
           </h2>
 
@@ -57,14 +57,14 @@ export default function MemberCard({ member, editable }) {
             ))}
           </section>
 
-          <p className="mt-6 text-base leading-7 text-brand-dark-highlight dark:text-brand-light-highlight">
+          <p className="text-brand-dark-highlight dark:text-brand-light-highlight mt-6 text-base leading-7">
             {member.bio}
           </p>
 
           {editable ? (
             <button
               onClick={() => setEditState(true)}
-              className="inline-block absolute bottom-0 left-0 py-1.5 px-2 text-brand-dark bg-brand-light-highlight rounded-md shadow-sm hover:bg-brand-light-highlight focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
+              className="focus-visible:outline-brand-light inline-block absolute bottom-0 left-0 py-1.5 px-2 text-gray-900 bg-gray-300 rounded-md shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2 dark:bg-gray-200"
             >
               Edit
             </button>
