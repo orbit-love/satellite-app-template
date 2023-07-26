@@ -19,7 +19,11 @@ export const authOptions = {
         },
       });
 
-      return validEmails.includes(user.email);
+      if (validEmails.includes(user.email)) return true;
+
+      // If user is not found, redirect to "verify request" page instead
+      // of error so we don't expose which members are in directory
+      return "/auth/verify-request";
     },
     async session({ session, user }) {
       // Find signed in member

@@ -10,6 +10,8 @@ export default function VerifyRequest() {
   // If member shouldn't have access to the repository, show
   // them the same screen as if they had signed in successfully
   // - this is so we don't expose which emails are listed on the directory
+  // Handled serverside by pages/api/auth/[...nextauth].js#signIn method,
+  // this just helps if someone manually visits this page
   if (error === "AccessDenied") {
     router.replace("/auth/verify-request");
   }
@@ -29,6 +31,8 @@ export default function VerifyRequest() {
       preamble = `There's something wrong with the server configuration.
         Ensure you have set environment variables correctly & try again.`;
       break;
+    // Whilst error is being fetched, don't show anything - this is so we don't flash
+    // the default error for about a frame before choosing which one to show
     case undefined:
       return;
     default:
