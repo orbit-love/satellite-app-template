@@ -24,8 +24,8 @@ export default function AdminControls({ setMembers }) {
   if (!session?.user.admin) return;
 
   return (
-    <section className="py-4 px-6 mt-20 mx-auto max-w-6xl rounded border border-gray-300 dark:border-gray-100">
-      <h2 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl dark:text-white">
+    <section className="border-brand-dark dark:border-brand-light py-4 px-6 mt-20 mx-auto max-w-6xl rounded border">
+      <h2 className="dark:text-brand-light text-xl font-bold tracking-tight text-brand-dark sm:text-2xl">
         Admin Controls
       </h2>
 
@@ -37,13 +37,13 @@ export default function AdminControls({ setMembers }) {
       <ul className="mt-3">
         <li className="flex inline-flex flex-col gap-4 items-center md:flex-row">
           <button
-            className="py-2 px-3 min-w-fit text-base font-semibold text-white bg-purple-500 rounded-md shadow-sm hover:bg-purple-600 focus-visible:outline-2 focus-visible:outline-purple-600 focus-visible:outline focus-visible:outline-offset-2"
+            className="text-brand-light bg-brand-accent hover:bg-brand-accent-highlight focus-visible:outline-brand-accent-highlight py-2 px-3 min-w-fit text-base font-semibold rounded-md shadow-sm focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2"
             onClick={refreshMembers}
           >
             Sync Members
           </button>
 
-          <p className="text-gray-900 dark:text-white">
+          <p className="dark:text-brand-light text-brand-dark">
             This will fetch the latest data from Orbit to update this list. Use
             it if you want to refresh which members appear in the directory.
             This can also be triggered by sending a POST request to{" "}

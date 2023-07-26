@@ -15,7 +15,7 @@ export default function MemberPreview({ member }) {
         alt=""
       />
 
-      <h2 className="mt-6 text-xl font-semibold tracking-tight leading-7 text-center text-gray-900 dark:text-white">
+      <h2 className="mt-6 text-xl font-semibold tracking-tight leading-7 text-center text-brand-dark dark:text-brand-light">
         {member.name}
       </h2>
     </li>

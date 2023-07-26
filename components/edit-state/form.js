@@ -42,7 +42,7 @@ export default function Form({ setEditState, member, setError }) {
       {/* ---------- Edit bio field ---------- */}
       <label
         htmlFor="bio"
-        className="tracking-tight leading-8 text-gray-900 dark:text-white"
+        className="tracking-tight leading-8 text-brand-dark dark:text-brand-light"
       >
         Bio
       </label>
@@ -56,14 +56,14 @@ export default function Form({ setEditState, member, setError }) {
         rows="4"
         name="bio"
         id="bio"
-        className="block py-1.5 px-2 mb-2 w-full text-gray-900 rounded-md border-0 ring-1 ring-inset ring-gray-300 shadow-sm focus:ring-2 focus:ring-inset focus:ring-indigo-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+        className="block py-1.5 px-2 mb-2 w-full text-brand-dark rounded-md border-0 ring-1 ring-inset ring-gray-300 shadow-sm focus:ring-2 focus:ring-inset focus:ring-indigo-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
         placeholder="Hi, I'm Delete..."
         value={bio}
         onChange={(e) => setBio(e.target.value)}
       ></textarea>
 
       {/* ---------- Show in public directory field ---------- */}
-      <p className="tracking-tight leading-8 text-gray-900 dark:text-white">
+      <p className="tracking-tight leading-8 text-brand-dark dark:text-brand-light">
         Public directory listing
       </p>
 
@@ -79,14 +79,14 @@ export default function Form({ setEditState, member, setError }) {
             name="shownInPublicDirectory"
             id="shownInPublicDirectory"
             type="checkbox"
-            className="w-4 h-4 text-purple-500 rounded border-gray-300 focus:ring-purple-500"
+            className="w-4 h-4 text-brand-accent rounded border-gray-300 focus:ring-brand-accent"
             checked={shownInPublicDirectory}
             onChange={(e) => setShownInPublicDirectory(e.target.checked)}
           />
         </div>
         <label
           htmlFor="shownInPublicDirectory"
-          className="ml-3 leading-6 text-gray-900 dark:text-white"
+          className="ml-3 leading-6 text-brand-dark dark:text-brand-light"
         >
           Show in public directory
         </label>
@@ -96,14 +96,14 @@ export default function Form({ setEditState, member, setError }) {
       <section className="inline-flex flex-row-reverse gap-2 w-full">
         <button
           type="submit"
-          className="inline-block flex-none py-2.5 px-3 text-white bg-purple-500 rounded-md shadow-sm hover:bg-purple-600 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline focus-visible:outline-offset-2"
+          className="inline-block flex-none py-2.5 px-3 text-brand-light bg-brand-accent rounded-md shadow-sm hover:bg-brand-accent-highlight focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
         >
           Save
         </button>
 
         <button
           onClick={() => setEditState(false)}
-          className="inline-block flex-none py-2.5 px-3 text-gray-900 bg-gray-200 rounded-md shadow-sm hover:bg-gray-300 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline focus-visible:outline-offset-2"
+          className="inline-block flex-none py-2.5 px-3 text-brand-dark bg-gray-200 rounded-md shadow-sm hover:bg-gray-300 focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
         >
           Cancel
         </button>

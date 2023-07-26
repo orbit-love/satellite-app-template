@@ -46,7 +46,7 @@ export default function VerifyRequest() {
     <LayoutUnauthenticated>
       {router.isReady ? (
         <div className="isolate relative px-6 py-48 mx-auto max-w-2xl text-center lg:px-8 lg:py-64">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl dark:text-white">
+          <h1 className="text-4xl font-bold tracking-tight text-brand-dark sm:text-6xl dark:text-brand-light">
             {title}
           </h1>
 
@@ -56,7 +56,7 @@ export default function VerifyRequest() {
 
           <Link
             href="/auth/sign-in"
-            className="inline-block flex-none py-3.5 px-5 mt-6 text-lg font-semibold text-white bg-purple-500 rounded-md shadow-sm hover:bg-purple-600 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline focus-visible:outline-offset-2"
+            className="inline-block flex-none py-3.5 px-5 mt-6 text-lg font-semibold text-brand-light bg-brand-accent rounded-md shadow-sm hover:bg-brand-accent-highlight focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
           >
             Back to login
           </Link>

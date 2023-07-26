@@ -9,7 +9,7 @@ export default function Preview({ initialMembers }) {
     <LayoutUnauthenticated>
       <div className="px-6 py-24 mx-auto max-w-[80%] sm:py-32 lg:px-8">
         <section className="mx-auto max-w-2xl sm:text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+          <h1 className="text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl dark:text-brand-light">
             See members in this community
           </h1>
 

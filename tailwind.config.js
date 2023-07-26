@@ -11,6 +11,8 @@ module.exports = {
         black: "#1E2124",
         white: "#FFFFFF",
 
+        // Used as supplementary colours for different
+        // degrees of text emphasis
         gray: {
           50: "#F8F9FB",
           100: "#F1F2F3",
@@ -25,16 +27,21 @@ module.exports = {
           900: "#1E2124",
         },
 
-        purple: {
-          100: "#EBE7FE",
-          200: "#BFB1FB",
-          300: "#9F8AF9",
-          400: "#8369F7",
-          500: "#6C4DF6",
-          600: "#5B41CF",
-          700: "#4A35A8",
-          800: "#392982",
-          900: "#281D5C",
+        // Update this section with your branding colours
+        brand: {
+          // Accent: the brand colour used to highlight elements, for example the background colour on the signin button
+          // Accent highlight: A colour similar to accent, used as the hover effect for buttons
+          // Dark: gray-900 by default. This will be used for text on a light background, and will be the dark background
+          // Light: White by default. This will be used for text on a dark background, and will be the light background
+
+          // IMPORTANT: "accent" is duplicated in the email template,
+          // See the variable brandColor in helpers/next-auth-helpers.js
+          // If you update it here, be sure to update it there too
+          accent: "#6C4DF6",
+          "accent-highlight": "#5B41CF",
+
+          dark: "#1E2124",
+          light: "#FFFFFF",
         },
       },
     },

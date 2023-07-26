@@ -35,7 +35,7 @@ export default function RevokeAccess({ id, setError }) {
 
       <label
         htmlFor="bio"
-        className="tracking-tight leading-8 text-gray-900 dark:text-white"
+        className="tracking-tight leading-8 text-brand-dark dark:text-brand-light"
       >
         Revoke Access
       </label>
@@ -51,14 +51,14 @@ export default function RevokeAccess({ id, setError }) {
             name="confirm"
             id="confirm"
             type="checkbox"
-            className="w-4 h-4 text-purple-500 rounded border-gray-300 focus:ring-purple-500"
+            className="w-4 h-4 text-brand-accent rounded border-gray-300 focus:ring-brand-accent"
             checked={isConfirmed}
             onChange={(e) => setIsConfirmed(e.target.checked)}
           />
         </div>
         <label
           htmlFor="confirm"
-          className="ml-3 leading-6 text-gray-900 dark:text-white"
+          className="ml-3 leading-6 text-brand-dark dark:text-brand-light"
         >
           I understand this will remove my listing & revoke my access to this
           directory
@@ -68,7 +68,7 @@ export default function RevokeAccess({ id, setError }) {
       <button
         type="submit"
         disabled={!isConfirmed}
-        className="inline-block flex-none py-2.5 px-3 w-full text-white bg-red-700 rounded-md shadow-sm hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline focus-visible:outline-offset-2 disabled:bg-red-800"
+        className="inline-block flex-none py-2.5 px-3 w-full text-brand-light bg-red-700 rounded-md shadow-sm hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2 disabled:bg-red-800"
       >
         Remove yourself from directory
       </button>
