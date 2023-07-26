@@ -4,10 +4,12 @@ import MemberCardEditState from "./edit-state/member-card-edit-state";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import Error from "./flashes/error";
+import Success from "./flashes/success";
 
 export default function MemberCard({ member, editable }) {
   const [editState, setEditState] = useState(false);
   const [imageError, setImageError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const { data: session } = useSession();
 
@@ -44,12 +46,18 @@ export default function MemberCard({ member, editable }) {
       )}
 
       {editState ? (
-        <MemberCardEditState setEditState={setEditState} member={member} />
+        <MemberCardEditState
+          setEditState={setEditState}
+          member={member}
+          setSuccess={setSuccess}
+        />
       ) : (
         <div className="relative flex-auto">
           <h2 className="text-brand-dark dark:text-brand-light text-xl font-semibold tracking-tight leading-8">
             {member.name}
           </h2>
+
+          {!!success ? <Success message={success} /> : ""}
 
           <section className="flex flex-col my-2 space-y-2">
             {member.identities.map((identity) => (
