@@ -42,12 +42,12 @@ export default function Form({ setEditState, member, setError }) {
       {/* ---------- Edit bio field ---------- */}
       <label
         htmlFor="bio"
-        className="tracking-tight leading-8 text-brand-dark dark:text-brand-light"
+        className="text-brand-dark dark:text-brand-light tracking-tight leading-8"
       >
         Bio
       </label>
 
-      <small className="block mb-2 text-brand-dark-highlight dark:text-brand-light-highlight">
+      <small className="text-brand-dark-highlight dark:text-brand-light-highlight block mb-2">
         A short introduction about yourself. This will only be shown to other
         members on the directory
       </small>
@@ -56,18 +56,18 @@ export default function Form({ setEditState, member, setError }) {
         rows="4"
         name="bio"
         id="bio"
-        className="block py-1.5 px-2 mb-2 w-full text-brand-dark rounded-md border-0 ring-1 ring-inset ring-brand-light-highlight shadow-sm focus:ring-2 focus:ring-inset focus:ring-indigo-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+        className="text-brand-dark ring-brand-light-highlight block py-1.5 px-2 mb-2 w-full rounded-md border-0 ring-1 ring-inset shadow-sm focus:ring-2 focus:ring-inset focus:ring-indigo-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
         placeholder="Hi, I'm Delete..."
         value={bio}
         onChange={(e) => setBio(e.target.value)}
       ></textarea>
 
       {/* ---------- Show in public directory field ---------- */}
-      <p className="tracking-tight leading-8 text-brand-dark dark:text-brand-light">
+      <p className="text-brand-dark dark:text-brand-light tracking-tight leading-8">
         Public directory listing
       </p>
 
-      <small className="block mb-2 text-brand-dark-highlight dark:text-brand-light-highlight">
+      <small className="text-brand-dark-highlight dark:text-brand-light-highlight block mb-2">
         This will show your name & profile picture on the public-facing page of
         this directory. You can revoke access to this at any time by unchecking
         this & hitting "Save".
@@ -79,14 +79,14 @@ export default function Form({ setEditState, member, setError }) {
             name="shownInPublicDirectory"
             id="shownInPublicDirectory"
             type="checkbox"
-            className="w-4 h-4 text-brand-accent rounded border-brand-light-highlight focus:ring-brand-accent"
+            className="text-brand-accent border-brand-light-highlight focus:ring-brand-accent w-4 h-4 rounded"
             checked={shownInPublicDirectory}
             onChange={(e) => setShownInPublicDirectory(e.target.checked)}
           />
         </div>
         <label
           htmlFor="shownInPublicDirectory"
-          className="ml-3 leading-6 text-brand-dark dark:text-brand-light"
+          className="text-brand-dark dark:text-brand-light ml-3 leading-6"
         >
           Show in public directory
         </label>
@@ -96,14 +96,14 @@ export default function Form({ setEditState, member, setError }) {
       <section className="inline-flex flex-row-reverse gap-2 w-full">
         <button
           type="submit"
-          className="inline-block flex-none py-2.5 px-3 text-brand-light bg-brand-accent rounded-md shadow-sm hover:bg-brand-accent-highlight focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
+          className="bg-brand-accent hover:bg-brand-accent-highlight focus-visible:outline-brand-light inline-block flex-none py-2.5 px-3 text-white rounded-md shadow-sm focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2"
         >
           Save
         </button>
 
         <button
           onClick={() => setEditState(false)}
-          className="inline-block flex-none py-2.5 px-3 text-brand-dark bg-brand-light-highlight rounded-md shadow-sm hover:bg-brand-light-highlight focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
+          className="focus-visible:outline-brand-light inline-block flex-none py-2.5 px-3 text-gray-900 bg-gray-300 rounded-md shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2 dark:bg-gray-200"
         >
           Cancel
         </button>

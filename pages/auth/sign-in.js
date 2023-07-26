@@ -38,7 +38,7 @@ export default function SignIn({ csrfToken }) {
 
           <button
             type="submit"
-            className="text-brand-light bg-brand-accent hover:bg-brand-accent-highlight focus-visible:outline-brand-light inline-block flex-none py-3.5 px-5 text-lg font-semibold rounded-md shadow-sm focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2"
+            className="bg-brand-accent hover:bg-brand-accent-highlight focus-visible:outline-brand-light inline-block flex-none py-3.5 px-5 text-lg font-semibold text-white rounded-md shadow-sm focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2"
           >
             Sign in with Email
           </button>
