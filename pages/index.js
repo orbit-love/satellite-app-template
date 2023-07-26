@@ -12,11 +12,11 @@ export default function Home({ initialMembers }) {
     <LayoutAuthenticated>
       <div className="px-6 py-24 mx-auto max-w-[80%] sm:py-32 lg:px-8">
         <section className="mx-auto max-w-2xl sm:text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+          <h1 className="text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl dark:text-brand-light">
             Meet other members
           </h1>
 
-          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+          <p className="mt-6 text-lg leading-8 text-brand-dark-highlight dark:text-brand-light-highlight">
             This is your space to find others in your community. Engage in
             conversations, share your ideas, and develop strong relationships.
             Step in, join the dialogue, and explore the community!

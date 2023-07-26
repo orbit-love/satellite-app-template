@@ -22,7 +22,7 @@ export default function Header() {
         ""
       ) : (
         <Link
-          className="text-xl font-light text-gray-900 hover:underline focus:underline dark:text-white"
+          className="text-xl font-light text-brand-dark hover:underline focus:underline dark:text-brand-light"
           href="/preview"
         >
           Preview

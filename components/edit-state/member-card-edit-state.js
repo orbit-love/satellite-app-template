@@ -8,7 +8,7 @@ export default function MemberCardEditState({ setEditState, member }) {
 
   return (
     <div className="flex-auto">
-      <h2 className="text-xl font-semibold tracking-tight leading-8 text-gray-900 dark:text-white">
+      <h2 className="text-xl font-semibold tracking-tight leading-8 text-brand-dark dark:text-brand-light">
         Edit
       </h2>
 

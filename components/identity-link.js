@@ -29,7 +29,7 @@ export default function IdentityLink({ identity }) {
         className="w-auto h-8"
       />
 
-      <span className="text-lg text-gray-600 dark:text-gray-200">
+      <span className="text-lg text-brand-dark-highlight dark:text-brand-light-highlight">
         @{identity.username}
       </span>
     </Link>
