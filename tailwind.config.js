@@ -11,8 +11,7 @@ module.exports = {
         black: "#1E2124",
         white: "#FFFFFF",
 
-        // Used as supplementary colours for different
-        // degrees of text emphasis
+        // Used very rarely (ie placeholder text) when typical brand colours are unsuitable
         gray: {
           50: "#F8F9FB",
           100: "#F1F2F3",
@@ -29,19 +28,24 @@ module.exports = {
 
         // Update this section with your branding colours
         brand: {
-          // Accent: the brand colour used to highlight elements, for example the background colour on the signin button
-          // Accent highlight: A colour similar to accent, used as the hover effect for buttons
-          // Dark: gray-900 by default. This will be used for text on a light background, and will be the dark background
-          // Light: White by default. This will be used for text on a dark background, and will be the light background
-
           // IMPORTANT: "accent" is duplicated in the email template,
           // See the variable brandColor in helpers/next-auth-helpers.js
           // If you update it here, be sure to update it there too
+
+          // Accent:           the brand colour used to highlight elements, for example the background colour on the signin button
+          // Accent highlight: A colour similar to accent, used as the hover effect for buttons
           accent: "#6C4DF6",
           "accent-highlight": "#5B41CF",
 
+          // Dark:           gray-900 by default. This will be used for text on a light background, and will be the dark background
+          // Dark highlight: gray-700 by default. Used for secondary text on light pages to add depth to page
           dark: "#1E2124",
+          "dark-highlight": "#3A4045",
+
+          // Light:           White by default. This will be used for text on a dark background, and will be the light background
+          // Light highlight: gray-200 by default. Used for secondary text on dark pages to add depth to page
           light: "#FFFFFF",
+          "light-highlight": "#D3D6DA",
         },
       },
     },

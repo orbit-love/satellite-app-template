@@ -8,7 +8,7 @@ export default function VerifyRequest() {
           Thanks!
         </h1>
 
-        <p className="mt-6 text-xl leading-8 text-gray-600 dark:text-gray-200">
+        <p className="mt-6 text-xl leading-8 text-brand-dark-highlight dark:text-brand-light-highlight">
           If your details are listed in this directory, we've just sent you an
           email with a verification link. Click on that link to complete your
           sign-in process. If you can't access the directory, but believe you

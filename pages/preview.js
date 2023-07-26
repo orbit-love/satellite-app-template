@@ -13,7 +13,7 @@ export default function Preview({ initialMembers }) {
             See members in this community
           </h1>
 
-          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+          <p className="mt-6 text-lg leading-8 text-brand-dark-highlight dark:text-brand-light-highlight">
             This is your hub to discover members within this community. Sign in
             to see more details!
           </p>

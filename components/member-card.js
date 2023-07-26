@@ -57,14 +57,14 @@ export default function MemberCard({ member, editable }) {
             ))}
           </section>
 
-          <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-200">
+          <p className="mt-6 text-base leading-7 text-brand-dark-highlight dark:text-brand-light-highlight">
             {member.bio}
           </p>
 
           {editable ? (
             <button
               onClick={() => setEditState(true)}
-              className="inline-block absolute bottom-0 left-0 py-1.5 px-2 text-brand-dark bg-gray-200 rounded-md shadow-sm hover:bg-gray-300 focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
+              className="inline-block absolute bottom-0 left-0 py-1.5 px-2 text-brand-dark bg-brand-light-highlight rounded-md shadow-sm hover:bg-brand-light-highlight focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
             >
               Edit
             </button>

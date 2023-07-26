@@ -29,7 +29,7 @@ export default function AdminControls({ setMembers }) {
         Admin Controls
       </h2>
 
-      <p className="mt-3 text-lg leading-8 text-gray-600 dark:text-gray-300">
+      <p className="mt-3 text-lg leading-8 text-brand-dark-highlight dark:text-brand-light-highlight">
         This section is not shown to non-admin users. Use it to manage the data
         shown in this directory
       </p>

@@ -50,7 +50,7 @@ export default function VerifyRequest() {
             {title}
           </h1>
 
-          <p className="mt-6 text-xl leading-8 text-gray-600 dark:text-gray-200">
+          <p className="mt-6 text-xl leading-8 text-brand-dark-highlight dark:text-brand-light-highlight">
             {preamble}
           </p>
 

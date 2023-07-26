@@ -47,7 +47,7 @@ export default function Form({ setEditState, member, setError }) {
         Bio
       </label>
 
-      <small className="block mb-2 text-gray-700 dark:text-gray-300">
+      <small className="block mb-2 text-brand-dark-highlight dark:text-brand-light-highlight">
         A short introduction about yourself. This will only be shown to other
         members on the directory
       </small>
@@ -56,7 +56,7 @@ export default function Form({ setEditState, member, setError }) {
         rows="4"
         name="bio"
         id="bio"
-        className="block py-1.5 px-2 mb-2 w-full text-brand-dark rounded-md border-0 ring-1 ring-inset ring-gray-300 shadow-sm focus:ring-2 focus:ring-inset focus:ring-indigo-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+        className="block py-1.5 px-2 mb-2 w-full text-brand-dark rounded-md border-0 ring-1 ring-inset ring-brand-light-highlight shadow-sm focus:ring-2 focus:ring-inset focus:ring-indigo-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
         placeholder="Hi, I'm Delete..."
         value={bio}
         onChange={(e) => setBio(e.target.value)}
@@ -67,7 +67,7 @@ export default function Form({ setEditState, member, setError }) {
         Public directory listing
       </p>
 
-      <small className="block mb-2 text-gray-700 dark:text-gray-300">
+      <small className="block mb-2 text-brand-dark-highlight dark:text-brand-light-highlight">
         This will show your name & profile picture on the public-facing page of
         this directory. You can revoke access to this at any time by unchecking
         this & hitting "Save".
@@ -79,7 +79,7 @@ export default function Form({ setEditState, member, setError }) {
             name="shownInPublicDirectory"
             id="shownInPublicDirectory"
             type="checkbox"
-            className="w-4 h-4 text-brand-accent rounded border-gray-300 focus:ring-brand-accent"
+            className="w-4 h-4 text-brand-accent rounded border-brand-light-highlight focus:ring-brand-accent"
             checked={shownInPublicDirectory}
             onChange={(e) => setShownInPublicDirectory(e.target.checked)}
           />
@@ -103,7 +103,7 @@ export default function Form({ setEditState, member, setError }) {
 
         <button
           onClick={() => setEditState(false)}
-          className="inline-block flex-none py-2.5 px-3 text-brand-dark bg-gray-200 rounded-md shadow-sm hover:bg-gray-300 focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
+          className="inline-block flex-none py-2.5 px-3 text-brand-dark bg-brand-light-highlight rounded-md shadow-sm hover:bg-brand-light-highlight focus-visible:outline-2 focus-visible:outline-brand-light focus-visible:outline focus-visible:outline-offset-2"
         >
           Cancel
         </button>

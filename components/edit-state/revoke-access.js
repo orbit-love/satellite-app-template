@@ -40,7 +40,7 @@ export default function RevokeAccess({ id, setError }) {
         Revoke Access
       </label>
 
-      <small className="block mb-2 text-gray-700 dark:text-gray-300">
+      <small className="block mb-2 text-brand-dark-highlight dark:text-brand-light-highlight">
         This will remove your profile from this directory, and consequently
         prevent you from accessing the directory in the future.
       </small>
@@ -51,7 +51,7 @@ export default function RevokeAccess({ id, setError }) {
             name="confirm"
             id="confirm"
             type="checkbox"
-            className="w-4 h-4 text-brand-accent rounded border-gray-300 focus:ring-brand-accent"
+            className="w-4 h-4 text-brand-accent rounded border-brand-light-highlight focus:ring-brand-accent"
             checked={isConfirmed}
             onChange={(e) => setIsConfirmed(e.target.checked)}
           />
