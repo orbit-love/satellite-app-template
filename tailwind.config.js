@@ -34,18 +34,18 @@ module.exports = {
 
           // Accent:           the brand colour used to highlight elements, for example the background colour on the signin button
           // Accent highlight: A colour similar to accent, used as the hover effect for buttons
-          accent: "#6C4DF6",
-          "accent-highlight": "#5B41CF",
+          accent: "#B18A50",
+          "accent-highlight": "#94703A",
 
           // Dark:           gray-900 by default. This will be used for text on a light background, and will be the dark background
           // Dark highlight: gray-700 by default. Used for secondary text on light pages to add depth to page
-          dark: "#1E2124",
-          "dark-highlight": "#3A4045",
+          dark: "#141213",
+          "dark-highlight": "#221E1F",
 
           // Light:           White by default. This will be used for text on a dark background, and will be the light background
           // Light highlight: gray-200 by default. Used for secondary text on dark pages to add depth to page
-          light: "#FFFFFF",
-          "light-highlight": "#D3D6DA",
+          light: "#EBEADC",
+          "light-highlight": "#CCCAB4",
         },
       },
     },

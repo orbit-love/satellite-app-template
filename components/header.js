@@ -10,8 +10,16 @@ export default function Header() {
     <header className="flex gap-x-6 justify-between items-center p-6 mx-auto max-w-7xl lg:px-8">
       <Link className="flex" href="/">
         <Image
-          className="w-auto h-12"
-          src="/orbit-icon-purple.svg"
+          className="hidden w-auto h-28 dark:block"
+          src="/dm-icon-light.svg"
+          alt="Home"
+          width={50}
+          height={50}
+        />
+
+        <Image
+          className="block w-auto h-28 dark:hidden"
+          src="/dm-icon-dark.svg"
           alt="Home"
           width={50}
           height={50}
@@ -22,7 +30,7 @@ export default function Header() {
         ""
       ) : (
         <Link
-          className="text-xl font-light text-brand-dark hover:underline focus:underline dark:text-brand-light"
+          className="text-brand-dark dark:text-brand-light text-xl font-light hover:underline focus:underline"
           href="/preview"
         >
           Preview
