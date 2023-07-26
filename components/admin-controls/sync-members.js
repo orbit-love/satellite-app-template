@@ -1,5 +1,10 @@
-export default function SyncMembers({ setMembers, setError }) {
+import { useState } from "react";
+
+export default function SyncMembers({ setMembers, setError, setSuccess }) {
+  const [isBusy, setIsBusy] = useState(false);
+
   async function refreshMembers() {
+    setIsBusy(true);
     const res = await fetch("/api/populate-members-table", { method: "POST" });
 
     if (res.ok) {
@@ -7,18 +12,23 @@ export default function SyncMembers({ setMembers, setError }) {
 
       setMembers(data.members);
       setError("");
+      setSuccess("Members synced successfully.");
     } else {
       setError(
         "Something went wrong with the Sync Members action. Please verify your workspace slug & API key are set correctly in the environment variables & try again."
       );
+      setSuccess("");
     }
+
+    setIsBusy(false);
   }
 
   return (
     <li className="flex inline-flex flex-col gap-4 items-center md:flex-row">
       <button
-        className="bg-brand-accent hover:bg-brand-accent-highlight focus-visible:outline-brand-accent-highlight py-2 px-3 min-w-fit text-base font-semibold text-white rounded-md shadow-sm focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2"
+        className="py-2 px-3 min-w-fit text-base font-semibold text-white bg-green-600 rounded-md shadow-sm hover:bg-green-700 focus-visible:outline-2 focus-visible:outline-green-700 focus-visible:outline focus-visible:outline-offset-2 disabled:bg-green-900"
         onClick={refreshMembers}
+        disabled={isBusy}
       >
         Sync Members
       </button>

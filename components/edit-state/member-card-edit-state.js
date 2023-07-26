@@ -1,7 +1,7 @@
 import { useState } from "react";
 import RevokeAccess from "./revoke-access";
 import Form from "./form";
-import Error from "../error";
+import Error from "../flashes/error";
 
 export default function MemberCardEditState({ setEditState, member }) {
   const [error, setError] = useState("");

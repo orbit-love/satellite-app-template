@@ -1,11 +1,13 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import Error from "../error";
+import Error from "../flashes/error";
 import SyncMembers from "./sync-members";
+import Success from "../flashes/success";
 
 export default function AdminControls({ setMembers }) {
   const { data: session } = useSession();
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   if (!session?.user.admin) return;
 
@@ -21,10 +23,15 @@ export default function AdminControls({ setMembers }) {
       </p>
 
       <ul className="mt-3">
-        <SyncMembers setMembers={setMembers} setError={setError} />
+        <SyncMembers
+          setMembers={setMembers}
+          setError={setError}
+          setSuccess={setSuccess}
+        />
       </ul>
 
       {!!error ? <Error message={error} /> : ""}
+      {!!success ? <Success message={success} /> : ""}
     </section>
   );
 }
