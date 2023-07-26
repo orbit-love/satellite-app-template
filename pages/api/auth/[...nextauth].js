@@ -3,6 +3,7 @@ import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import { getAllMemberEmails } from "../../../helpers/prisma-helpers";
+import { sendVerificationRequest } from "../../../helpers/next-auth-helpers";
 
 const prisma = new PrismaClient();
 
@@ -53,6 +54,7 @@ export const authOptions = {
         },
       },
       from: process.env.SMTP_FROM,
+      sendVerificationRequest,
     }),
   ],
 };
