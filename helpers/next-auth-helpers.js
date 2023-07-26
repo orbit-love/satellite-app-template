@@ -35,10 +35,10 @@ function html(params) {
 
   const escapedHost = host.replace(/\./g, "&#8203;.");
 
-  const brandColor = theme.brandColor || "#346df1";
+  const brandColor = theme.brandColor || "#6C4DF6";
   const color = {
     background: "#f9f9f9",
-    text: "#444",
+    text: "#1E2124",
     mainBackground: "#fff",
     buttonBackground: brandColor,
     buttonBorder: brandColor,
@@ -51,10 +51,18 @@ function html(params) {
     style="background: ${color.mainBackground}; max-width: 600px; margin: auto; border-radius: 10px;">
     <tr>
       <td align="center"
-        style="padding: 10px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
-        Sign in owo <strong>${escapedHost}</strong>
+        style="padding: 10px 0px 0px 0px; font-size: 29px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
+        Verify email
       </td>
     </tr>
+
+    <tr>
+      <td align="center"
+        style="padding: 10px 0px 0px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
+        Click the link below to sign in to <strong>${escapedHost}</strong>
+      </td>
+    </tr>
+
     <tr>
       <td align="center" style="padding: 20px 0;">
         <table border="0" cellspacing="0" cellpadding="0">
@@ -67,6 +75,21 @@ function html(params) {
         </table>
       </td>
     </tr>
+
+    <tr>
+      <td align="center"
+        style="font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
+        Or copy-paste the following URL into your browser:
+      </td>
+    </tr>
+
+    <tr>
+      <td align="center"
+        style="padding: 0px 30px 0px 30px; word-break: break-all; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
+        <small>${url}</small>
+      </td>
+    </tr>
+
     <tr>
       <td align="center"
         style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
