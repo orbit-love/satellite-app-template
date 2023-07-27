@@ -1,10 +1,13 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import RevokeAccess from "./revoke-access";
 import { signOut } from "next-auth/react";
 
 // Mocking fetch and signOut
 global.fetch = jest.fn();
-jest.mock("next-auth/react", () => ({ signOut: jest.fn() }));
+jest.mock("next-auth/react", () => ({
+  ...jest.requireActual("next-auth/react"),
+  signOut: jest.fn(),
+}));
 
 const id = 1;
 const setError = jest.fn();
@@ -58,14 +61,58 @@ describe("RevokeAccess", () => {
   });
 
   it("submits the form with the correct parameters when checkbox is checked", async () => {
-    // Your implementation here
-  });
+    fetch.mockResolvedValueOnce({
+      ok: true,
+    });
 
-  it("calls signOut on successful response", async () => {
-    // Your implementation here
+    render(<RevokeAccess id={id} setError={setError} />);
+
+    const submit = document.querySelector("button");
+    const check = document.querySelector("#confirm");
+
+    fireEvent.click(check);
+    fireEvent.click(submit);
+
+    expect(fetch).toHaveBeenCalledWith("/api/revoke-access-for-member", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id, shownInDirectory: false }),
+    });
+
+    await waitFor(() => {
+      expect(signOut).toHaveBeenCalledWith({ callbackUrl: "/auth/goodbye" });
+      expect(setError).not.toHaveBeenCalled();
+    });
   });
 
   it("calls setError on failed response", async () => {
-    // Your implementation here
+    fetch.mockResolvedValueOnce({
+      ok: false,
+    });
+
+    render(<RevokeAccess id={id} setError={setError} />);
+
+    const submit = document.querySelector("button");
+    const check = document.querySelector("#confirm");
+
+    fireEvent.click(check);
+    fireEvent.click(submit);
+
+    expect(fetch).toHaveBeenCalledWith("/api/revoke-access-for-member", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id, shownInDirectory: false }),
+    });
+
+    await waitFor(() => {
+      expect(signOut).not.toHaveBeenCalled();
+      expect(setError).toHaveBeenCalledWith(
+        "Something went wrong! Please try again or contact your community manager who will be able to manually remove you."
+      );
+    });
   });
 });
