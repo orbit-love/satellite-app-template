@@ -56,6 +56,7 @@ export default function RevokeAccess({ id, setError }) {
             onChange={(e) => setIsConfirmed(e.target.checked)}
           />
         </div>
+
         <label
           htmlFor="confirm"
           className="text-brand-dark dark:text-brand-light ml-3 leading-6"
