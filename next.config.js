@@ -16,6 +16,14 @@ module.exports = {
         hostname: "pbs.twimg.com",
         pathname: "/profile_images/*/*",
       },
+      {
+        protocol: "https",
+        hostname: "*.cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "ca.slack-edge.com",
+      },
     ],
   },
 };
