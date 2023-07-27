@@ -45,7 +45,7 @@ export default function VerifyRequest() {
   return (
     <LayoutUnauthenticated>
       {router.isReady ? (
-        <div className="isolate relative px-6 py-48 mx-auto max-w-2xl text-center lg:px-8 lg:py-64">
+        <div className="isolate relative px-6 mx-auto max-w-2xl text-center lg:px-8">
           <h1 className="text-brand-dark dark:text-brand-light text-4xl font-bold tracking-tight sm:text-6xl">
             {title}
           </h1>

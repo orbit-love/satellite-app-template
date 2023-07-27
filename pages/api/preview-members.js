@@ -13,7 +13,8 @@ export default async function handle(req, res) {
 
     res.status(200).json(members);
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    console.error(`Something went wrong. ${e.message}`);
+    res.status(500).send();
   } finally {
     await prisma.$disconnect();
   }

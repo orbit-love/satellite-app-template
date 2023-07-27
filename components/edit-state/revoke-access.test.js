@@ -73,7 +73,7 @@ describe("RevokeAccess", () => {
     fireEvent.click(check);
     fireEvent.click(submit);
 
-    expect(fetch).toHaveBeenCalledWith("/api/revoke-access-for-member", {
+    expect(fetch).toHaveBeenCalledWith("/api/update-member", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ describe("RevokeAccess", () => {
     fireEvent.click(check);
     fireEvent.click(submit);
 
-    expect(fetch).toHaveBeenCalledWith("/api/revoke-access-for-member", {
+    expect(fetch).toHaveBeenCalledWith("/api/update-member", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

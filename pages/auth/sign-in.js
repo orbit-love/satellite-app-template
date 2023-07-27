@@ -4,7 +4,7 @@ import LayoutUnauthenticated from "../../components/layout-unauthenticated";
 export default function SignIn({ csrfToken }) {
   return (
     <LayoutUnauthenticated>
-      <div className="isolate relative px-6 py-48 mx-auto max-w-2xl text-center lg:px-8 lg:py-64">
+      <div className="isolate relative px-6 mx-auto max-w-2xl text-center lg:px-8">
         <h1 className="dark:text-brand-light text-brand-dark text-4xl font-bold tracking-tight sm:text-6xl">
           Member Directory
         </h1>
