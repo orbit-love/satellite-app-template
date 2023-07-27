@@ -35,12 +35,12 @@ export default function RevokeAccess({ id, setError }) {
 
       <label
         htmlFor="bio"
-        className="tracking-tight leading-8 text-gray-900 dark:text-white"
+        className="text-brand-dark dark:text-brand-light tracking-tight leading-8"
       >
         Revoke Access
       </label>
 
-      <small className="block mb-2 text-gray-700 dark:text-gray-300">
+      <small className="text-brand-dark-highlight dark:text-brand-light-highlight block mb-2">
         This will remove your profile from this directory, and consequently
         prevent you from accessing the directory in the future.
       </small>
@@ -51,14 +51,14 @@ export default function RevokeAccess({ id, setError }) {
             name="confirm"
             id="confirm"
             type="checkbox"
-            className="w-4 h-4 text-purple-500 rounded border-gray-300 focus:ring-purple-500"
+            className="text-brand-accent border-brand-light-highlight focus:ring-brand-accent w-4 h-4 rounded"
             checked={isConfirmed}
             onChange={(e) => setIsConfirmed(e.target.checked)}
           />
         </div>
         <label
           htmlFor="confirm"
-          className="ml-3 leading-6 text-gray-900 dark:text-white"
+          className="text-brand-dark dark:text-brand-light ml-3 leading-6"
         >
           I understand this will remove my listing & revoke my access to this
           directory
@@ -68,7 +68,7 @@ export default function RevokeAccess({ id, setError }) {
       <button
         type="submit"
         disabled={!isConfirmed}
-        className="inline-block flex-none py-2.5 px-3 w-full text-white bg-red-700 rounded-md shadow-sm hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline focus-visible:outline-offset-2 disabled:bg-red-800"
+        className="focus-visible:outline-brand-light inline-block flex-none py-2.5 px-3 w-full text-white bg-red-700 rounded-md shadow-sm hover:bg-red-800 focus:bg-red-800 focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2 disabled:bg-red-800"
       >
         Remove yourself from directory
       </button>

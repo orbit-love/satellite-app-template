@@ -2,13 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function IdentityLink({ identity }) {
-  let logo;
+  let lightThemeLogo, darkThemeLogo;
   switch (identity.type) {
     case "twitter_identity":
-      logo = "/twitter-icon-blue.png";
+      lightThemeLogo = "/twitter-icon-blue.svg";
+      darkThemeLogo = "/twitter-icon-white.svg";
       break;
     case "linkedin_identity":
-      logo = "/linkedin-icon-blue.png";
+      lightThemeLogo = "/linkedin-icon-blue.svg";
+      darkThemeLogo = "/linkedin-icon-white.svg";
       break;
     default:
       break;
@@ -22,14 +24,22 @@ export default function IdentityLink({ identity }) {
       className="block inline-flex gap-2 items-center w-min"
     >
       <Image
-        src={logo}
-        width={30}
-        height={30}
+        src={lightThemeLogo}
+        width={35}
+        height={35}
         alt={identity.type.replace("_", " ")}
-        className="w-auto h-8"
+        className="block w-10 h-auto dark:hidden min-w-[35px]"
       />
 
-      <span className="text-lg text-gray-600 dark:text-gray-200">
+      <Image
+        src={darkThemeLogo}
+        width={35}
+        height={35}
+        alt={identity.type.replace("_", " ")}
+        className="hidden min-w-[35px] w-10 h-auto dark:block"
+      />
+
+      <span className="hover:text-brand-dark-highlight focus:text-brand-dark-highlight text-brand-dark dark:hover:text-brand-light-highlight dark:focus:text-brand-light-highlight dark:text-brand-light text-lg hover:underline focus:underline">
         @{identity.username}
       </span>
     </Link>
