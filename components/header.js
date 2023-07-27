@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 export default function Header() {
   const { data: session } = useSession();
   return (
-    <header className="flex gap-x-6 justify-between items-center p-6 mx-auto max-w-7xl lg:px-8">
+    <header className="flex gap-x-6 justify-between items-center p-6 mx-auto w-full max-w-7xl lg:px-8">
       <Link className="flex" href="/">
         <Image
           className="hidden w-auto h-28 dark:block"
