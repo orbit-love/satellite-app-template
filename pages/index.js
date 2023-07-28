@@ -56,7 +56,11 @@ export default function Home({ initialMembers }) {
 // Fetch members from /api/members route on component load (ie, initialise the data)
 // This is set as default value for the useState for members
 export async function getServerSideProps(context) {
-  const res = await fetch(`http://${context.req.headers.host}/api/members`);
+  const res = await fetch(`http://${context.req.headers.host}/api/members`, {
+    headers: {
+      cookie: context.req.headers.cookie,
+    },
+  });
   const data = await res.json();
 
   if (!data) {
