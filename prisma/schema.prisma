@@ -20,6 +20,7 @@ model Member {
   admin Boolean @default(false)
   shownInDirectory Boolean @default(true)
   shownInPublicDirectory Boolean @default(false)
+  featured Boolean @default(false)
 }
 
 model Identity {
