@@ -2,12 +2,6 @@ import { updateMember } from "../../helpers/prisma-helpers";
 import { withAuthCheck, withMethodCheck } from "../../helpers/api-helpers";
 
 async function handle(req, res) {
-  if (req.method !== "POST") {
-    console.error("Only POST requests permitted");
-    res.status(405).send();
-    return;
-  }
-
   try {
     // Attempt to update the user
     await updateMember(req.body);

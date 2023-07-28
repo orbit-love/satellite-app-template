@@ -4,14 +4,13 @@ import {
   getAllMembers,
   getAllMemberEmails,
 } from "../../helpers/prisma-helpers";
+import {
+  withAuthCheck,
+  withAdminCheck,
+  withMethodCheck,
+} from "../../helpers/api-helpers";
 
-export default async function handle(req, res) {
-  if (req.method !== "POST") {
-    console.error("Only POST requests permitted");
-    res.status(405).send();
-    return;
-  }
-
+async function handle(req, res) {
   const { members, included } = await fetchOrbitData();
 
   // Delete all existing identities
@@ -90,3 +89,5 @@ export async function fetchOrbitData(
 
   return { members, included };
 }
+
+export default withAuthCheck(withMethodCheck(withAdminCheck(handle)));

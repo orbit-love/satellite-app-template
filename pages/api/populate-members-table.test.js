@@ -1,6 +1,20 @@
 import { membersToRemove } from "./populate-members-table";
 import { getAllMemberEmails } from "../../helpers/prisma-helpers";
 
+// ------------------------------------------------------
+// Required when testing a route with withAuthCheck
+jest.mock("./auth/[...nextauth]", () => ({
+  authOptions: {},
+}));
+
+// Mock a valid session
+jest.mock("next-auth/next", () => ({
+  getServerSession: jest.fn().mockResolvedValue({
+    user: { email: "test@test.com" },
+  }),
+}));
+// ------------------------------------------------------
+
 jest.mock("../../helpers/prisma-helpers", () => ({
   getAllMemberEmails: jest.fn(),
 }));
