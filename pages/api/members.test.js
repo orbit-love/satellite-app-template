@@ -1,4 +1,4 @@
-import { handle } from "./members";
+import handle from "./members";
 import { getAllMembers } from "../../helpers/prisma-helpers";
 
 // ------------------------------------------------------
@@ -7,8 +7,11 @@ jest.mock("./auth/[...nextauth]", () => ({
   authOptions: {},
 }));
 
+// Mock a valid session
 jest.mock("next-auth/next", () => ({
-  getServerSession: jest.fn(),
+  getServerSession: jest.fn().mockResolvedValue({
+    user: { email: "test@test.com" },
+  }),
 }));
 // ------------------------------------------------------
 

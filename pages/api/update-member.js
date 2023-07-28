@@ -1,6 +1,7 @@
 import { updateMember } from "../../helpers/prisma-helpers";
+import { withAuthCheck, withMethodCheck } from "../../helpers/api-helpers";
 
-export default async function handle(req, res) {
+async function handle(req, res) {
   if (req.method !== "POST") {
     console.error("Only POST requests permitted");
     res.status(405).send();
@@ -19,3 +20,5 @@ export default async function handle(req, res) {
     res.status(400).send();
   }
 }
+
+export default withAuthCheck(withMethodCheck(handle));

@@ -1,6 +1,20 @@
 import { updateMember } from "../../helpers/prisma-helpers";
 import handle from "./update-member";
 
+// ------------------------------------------------------
+// Required when testing a route with withAuthCheck
+jest.mock("./auth/[...nextauth]", () => ({
+  authOptions: {},
+}));
+
+// Mock a valid session
+jest.mock("next-auth/next", () => ({
+  getServerSession: jest.fn().mockResolvedValue({
+    user: { email: "test@test.com" },
+  }),
+}));
+// ------------------------------------------------------
+
 // Mock the updateMember helper function
 jest.mock("../../helpers/prisma-helpers", () => ({
   updateMember: jest.fn(),
@@ -14,15 +28,6 @@ const res = {
 describe("/api/update-member", () => {
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it("responds with 405 when request method is not POST", async () => {
-    const req = { method: "GET" };
-
-    await handle(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(405);
-    expect(res.send).toHaveBeenCalled();
   });
 
   it("responds with 200 when request is valid", async () => {

@@ -2,7 +2,7 @@ import prisma from "../../lib/db";
 import { getAllMembers } from "../../helpers/prisma-helpers";
 import { withAuthCheck, withMethodCheck } from "../../helpers/api-helpers";
 
-export async function handle(req, res) {
+async function handle(req, res) {
   try {
     const members = await getAllMembers();
 
