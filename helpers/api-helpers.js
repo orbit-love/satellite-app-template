@@ -39,6 +39,30 @@ export const withAuthCheck = (handler) => {
 };
 
 /**
+ * higher-order function to check if a user is an admin before
+ * handling an HTTP request.
+ *
+ * @param {Function} handler - the function to handle the HTTP request
+ * @returns {Function} the new handler function with the added authentication check
+ */
+export const withAdminCheck = (handler) => {
+  return async (req, res) => {
+    const session = await getServerSession(req, res, authOptions);
+
+    if (!session?.user.admin) {
+      res.status(401).json({
+        message:
+          "Unauthorized. Please contact an admin to complete this action.",
+      });
+      return;
+    }
+
+    // If the check passed, call the actual handler
+    return handler(req, res);
+  };
+};
+
+/**
  * higher-order function to check the method of an HTTP request before
  * handling it.
  *
