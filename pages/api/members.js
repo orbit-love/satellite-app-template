@@ -1,7 +1,8 @@
 import prisma from "../../lib/db";
 import { getAllMembers } from "../../helpers/prisma-helpers";
+import { withAuthCheck, withMethodCheck } from "../../helpers/api-helpers";
 
-export default async function handle(req, res) {
+export async function handle(req, res) {
   try {
     const members = await getAllMembers();
 
@@ -13,3 +14,5 @@ export default async function handle(req, res) {
     await prisma.$disconnect();
   }
 }
+
+export default withAuthCheck(withMethodCheck(handle, "GET"));

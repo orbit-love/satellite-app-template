@@ -1,5 +1,14 @@
-import handle from "./members";
+import { handle } from "./members";
 import { getAllMembers } from "../../helpers/prisma-helpers";
+
+// Required when testing a route with withAuthCheck
+jest.mock("./auth/[...nextauth]", () => ({
+  authOptions: {},
+}));
+
+jest.mock("next-auth/next", () => ({
+  getServerSession: jest.fn().mockReturnValue(),
+}));
 
 jest.mock("../../helpers/prisma-helpers", () => ({
   getAllMembers: jest.fn(),
