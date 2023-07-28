@@ -9,7 +9,7 @@ export default function MemberList({ members }) {
   return (
     <ul
       role="list"
-      className="grid grid-cols-1 gap-x-6 gap-y-20 mt-20 mx-auto max-w-2xl sm:grid-cols-2 lg:gap-x-10 lg:max-w-6xl xl:max-w-none 2xl:grid-cols-3"
+      className="grid grid-cols-1 gap-x-6 gap-y-20 mt-6 mx-auto max-w-2xl sm:grid-cols-2 lg:gap-x-10 lg:max-w-6xl xl:max-w-none 2xl:grid-cols-3"
     >
       {members.map((member) => {
         // Only show members who are visible in directory
