@@ -1,5 +1,29 @@
 # The Orbit Member Directory
 
+1. [What is it?](#what-is-it)
+2. [Technical Overview](#technical-overview)
+   1. [Data](#data)
+   2. [Authentication](#authentication)
+      1. [Securing Frontend Pages](#securing-frontend-pages)
+      2. [Securing API Endpoints](#securing-api-endpoints)
+   3. [API Protection](#api-protection)
+3. [Local Setup](#local-setup)
+   1. [Environment Variables](#environment-variables)
+      1. [For Orbit](#for-orbit)
+      2. [For Emails](#for-emails)
+      3. [For the Database](#for-the-database)
+      4. [For next-auth](#for-next-auth)
+   2. [Initial data](#initial-data)
+   3. [Running the server, logging in](#running-the-server-logging-in)
+4. [Setting up your own instance](#setting-up-your-own-instance)
+   1. [Branding](#branding)
+      1. [Update brand colours](#update-brand-colours)
+      2. [Update brand images](#update-brand-images)
+      3. [Update SEO](#update-seo)
+   2. [Hosting (Recommended)](#hosting-recommended)
+5. [General tips](#general-tips)
+   1. [Changing the DB structure](#changing-the-db-structure)
+
 ## What is it?
 
 This app lets you host a subset of the members in your community and let them share their social profiles & a short bio about themselves. It is ideal for promoting engagement and fostering relationships between members.
@@ -223,11 +247,48 @@ The `brand-logo-background` image is referenced twice here, but it **must be an 
 
 ### Hosting (Recommended)
 
-Vercel + postgres
-Separate DBs staging & prod
+We have used Vercel to host the app due to it's [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) plugin - obviously this aligns very nicely with our infrastructure, where we need a lightweight DB to sit between the directory & Orbit.
+
+It makes hosting the directory a breeze. You'll need to create the new Vercel project & set up certain env vars like we did in [Environment Variables](#environment-variables), with two differences:
+
+1. You'll need to bring in mailer env vars from the mailer host of your choice instead of mailhog
+2. You can completely ignore the postgres env vars, as Vercel will provide those for us :)
+
+There is a very convenient [Quickstart Guide](https://vercel.com/docs/storage/vercel-postgres/quickstart) for Vercel Postgres, which I won't bother repeating here. But I would recommend setting up separate instances for production & staging, and you won't need one for development since we're using the database on your machine which will be much faster.
 
 ## General tips
 
 ### Changing the DB structure
 
-Change schema, generate migration. Runs automatically in prod thanks to hook in package.json
+To change the database structure, for example if you want to add a new field to members, you must... Change the database structure :P You update the `schema.prisma` file & then it will generate migrations for you, rather than the other way around.
+
+Say you add the following to the members table:
+
+```
+// prisma/schema.prisma
+
+// ...
+
+model Member {
+  id    Int     @id @default(autoincrement())
+  // ...
+  testAccount Boolean @default(false)
+}
+
+// ...
+```
+
+You then run:
+
+```
+npx prisma migrate dev # this will prompt you for a name for the migration
+npx prisma generate
+```
+
+And the change will apply to your development DB!
+
+Changes are applied automatically in staging & production environments thanks to the following line in the package.json:
+
+```
+"vercel-build": "prisma generate && prisma migrate deploy && next build"
+```
