@@ -33,8 +33,8 @@ export default function AdminForm({
         }. Please refresh to see changes.`
       );
 
-      // Setting this won't update the UI (since we fetch) featured &
-      // members separately, but it will ensure the form state remains
+      // Setting this won't update the UI (since we fetch featured &
+      // members separately) but it will ensure the form state remains
       // consistent in case the user exits and re-enters the form before
       // refreshing
       member.featured = featured;
