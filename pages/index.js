@@ -24,17 +24,9 @@ export default function Home({ initialMembers, initialFeatured }) {
 
         <AdminControls setMembers={setMembers} />
 
-        <h2 className="text-brand-dark dark:text-brand-light mt-20 text-2xl font-bold tracking-tight sm:text-3xl">
-          Featured Guests
-        </h2>
+        <MemberList title="Featured Guests" members={featured} />
 
-        <MemberList members={featured} />
-
-        <h2 className="text-brand-dark dark:text-brand-light mt-20 text-2xl font-bold tracking-tight sm:text-3xl">
-          All Members
-        </h2>
-
-        <MemberList members={members} />
+        <MemberList title="All Members" members={members} />
       </div>
     </LayoutAuthenticated>
   );
