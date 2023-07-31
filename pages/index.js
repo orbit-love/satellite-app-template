@@ -5,7 +5,7 @@ import MemberList from "../components/member-list";
 
 export default function Home({ initialMembers, initialFeatured }) {
   const [members, setMembers] = useState(initialMembers);
-  const [featured, setFeatured] = useState(initialFeatured);
+  const [featured] = useState(initialFeatured);
 
   return (
     <LayoutAuthenticated>
@@ -57,6 +57,9 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: { initialMembers: data.members, initialFeatured: data.featured },
+    props: {
+      initialMembers: data.members || [],
+      initialFeatured: data.featured || [],
+    },
   };
 }
