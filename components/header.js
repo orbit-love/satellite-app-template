@@ -11,7 +11,7 @@ export default function Header() {
       <Link className="flex" href="/">
         <Image
           className="hidden w-auto h-28 dark:block"
-          src="/dm-icon-light.svg"
+          src="/brand-icon-light.svg"
           alt="Home"
           width={50}
           height={50}
@@ -19,7 +19,7 @@ export default function Header() {
 
         <Image
           className="block w-auto h-28 dark:hidden"
-          src="/dm-icon-dark.svg"
+          src="/brand-icon-dark.svg"
           alt="Home"
           width={50}
           height={50}

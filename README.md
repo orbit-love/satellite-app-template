@@ -188,9 +188,38 @@ As an admin you should be able to sync members from the UI once you've signed in
 
 ### Branding
 
-Include SEO here
-Email colour & styling
-Link to PR
+We aim to keep this app flexible, and require minimal changes to switch over the branding.
+
+#### Update brand colours
+
+You can update the brand colors in the `tailwind.config.js` file by modifying these variables:
+
+```
+accent: "#6C4DF6"
+"accent-highlight": "#5B41CF"
+dark: "#1E2124"
+"dark-highlight": "#3A4045"
+light: "#FFFFFF"
+"light-highlight": "#D3D6DA"
+```
+
+Each color variable is documented in the same file for ease of reference.
+
+**Important** You will also need to copy-paste the "accent" value into the brandColor variable in helpers/next-auth-helpers.js. This will be used to colour the button in the email templates.
+
+### Update brand images
+
+Replace the following three images to the public/ directory:
+
+1. `brand-icon-dark.svg`, which will be shown in the header bar on light theme screens
+2. `brand-icon-light.svg`, which will be shown in the header bar on dark theme screens
+3. `brand-logo-background.png`, which will be show in SEO metadata when you share links to your directory & will be used as a favicon.
+
+### Update SEO
+
+All SEO for the app is configured using `next-seo`, and lives under `next-seo.config.js`. This is heavily based on a specific customer, so make sure you double-check everything here to reflect your organisation instead.
+
+The `brand-logo-background` image is referenced twice here, but it **must be an absolute URL**. You can achieve this by uploading it to a location that provides a URL for fetching the image in the future (such as a Cloudinary instance), or by referencing it from the production run of this app, e.g., `www.my-member-directory.com/brand-logo-background.png`. Just remember, this URL won't be valid until the image is uploaded to production.
 
 ### Hosting (Recommended)
 
