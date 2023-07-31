@@ -96,25 +96,93 @@ In the JavaScript version, the exported handler is enveloped in higher-order fun
 
 Common validations are stored in `helpers/api-helpers.js` for ease of reuse, such as: "is user signed in?" or "is user an admin?"
 
-## Running locally
+## Local Setup
 
-### Database setup
+To ensure a smooth development experience, a few elements need to be set up:
 
-Creating pg db, syncing it with prisma, generating new prisma client
-Link to docs
+### Environment Variables
 
-### Emails
+You can create an environment variables file from the provided example file using the following command:
 
-Mailhog, verifying mailhog running, viewing server
+```
+cp .env.example .env
+```
 
-### Env vars
+And we'll go through each key section with additional context & any required setup now:
 
-Copy example, fill in
+#### For Orbit
 
-### Running the server
+Four environment variables are needed to connect to your Orbit workspace:
 
-"for future instances you won't have to worry about this"
-Tests
+1. API_KEY: the user or workspace-scope API key for fetching data from Orbit.
+2. WORKSPACE_SLUG: identifies which workspace to source data from.
+3. ORBIT_TAG: designates which members in your main Orbit workspace should be tagged to appear in the member directory.
+4. ROOT_USER_EMAIL: used to instantiate the initial admin user. This is set via environment variables to prevent misuse upon a new instance deployment.
+
+Fill in these variables appropriately in your `.env` file.
+
+#### For Emails
+
+We use nodemailer and MailHog for email authentication. Install [MailHog](https://github.com/mailhog/MailHog), run the service, and ensure the HTTP server is accessible at [localhost:8025](http://localhost:8025).
+
+If necessary, you can change the email provider configuration in `pages/api/auth/[...nextauth].js` - but just having mailhog running & using the default env vars from the example should be enough to get you up and running.
+
+#### For the Database
+
+The default settings for PostgreSQL are:
+
+1. Host: localhost
+2. Port: 5432
+3. Username: postgres
+4. Password: postgres
+5. Database name: member-directory-dev (this can be altered as needed)
+
+Adjust these settings in your `.env` file if your configuration differs.
+
+With this information, you can populate the environment variable as guided. This example would be:
+
+```
+POSTGRES_PRISMA_URL=postgresql://postgres:postgres@localhost:5432/member-directory-dev?schema=public
+```
+
+And now to set up the database, execute these commands:
+
+```
+npx prisma db push
+npx prisma generate
+```
+
+#### For next-auth
+
+Set the Next-Auth configuration variables in your `.env` file. The secret can be any random string, and the URL should point to your local server (http://localhost:3000).
+
+This should be all you need to run the app and receive emails, but you still won't be able to sign in without any data. So...
+
+### Initial data
+
+There is a convenient API route for initialising your first admin user.
+
+Send a POST request to `localhost:3000/api/initialise-admin-member`. If it responds with a 200 OK & a created member object, you're all set to log in & move on to the next step.
+
+### Running the server, logging in
+
+Right, I feel like that was a lot 😪 But don't worry, that's all one-time setup. From now-on you should be clear to just:
+
+```
+yarn dev
+```
+
+& visit [localhost:3000](http://localhost:3000) to see the directory, and [localhost:8025](http://localhost:8025) to see incoming emails to sign in.
+
+And it's
+
+```
+yarn test --watch
+```
+
+to run the automated tests in an instance where they hot-reload with changes.
+
+As an admin you should be able to sync members from the UI once you've signed in, which will pull the latest data from Orbit.
 
 ## Setting up your own instance
 
