@@ -81,7 +81,7 @@ describe("AdminForm", () => {
       fireEvent.click(save);
 
       await waitFor(() => {
-        expect(fetch).toHaveBeenCalledWith("/api/update-member", {
+        expect(fetch).toHaveBeenCalledWith("/api/admin-update-member", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -95,7 +95,7 @@ describe("AdminForm", () => {
         expect(setEditState).toHaveBeenCalledWith(false);
         expect(setError).toHaveBeenCalledWith("");
         expect(setSuccess).toHaveBeenCalledWith(
-          "Updated. Member is now featured."
+          "Updated. Member is now featured. Please refresh to see changes."
         );
       });
     });

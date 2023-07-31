@@ -7,8 +7,6 @@ async function handle(req, res) {
     const featured = await getAllMembers({ where: { featured: true } });
     const members = await getAllMembers({ where: { featured: false } });
 
-    console.log(featured, members);
-
     res.status(200).json({ featured, members });
   } catch (e) {
     console.error(`Something went wrong. ${e.message}`);

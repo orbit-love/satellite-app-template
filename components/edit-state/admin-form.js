@@ -17,7 +17,7 @@ export default function AdminForm({
 
     let body = { id: member.id, featured: featured };
 
-    const response = await fetch("/api/update-member", {
+    const response = await fetch("/api/admin-update-member", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,8 +28,16 @@ export default function AdminForm({
     if (response.ok) {
       setError("");
       setSuccess(
-        `Updated. Member is now ${featured ? "featured" : "not featured"}.`
+        `Updated. Member is ${
+          featured ? "now featured" : "no longer featured"
+        }. Please refresh to see changes.`
       );
+
+      // Setting this won't update the UI (since we fetch) featured &
+      // members separately, but it will ensure the form state remains
+      // consistent in case the user exits and re-enters the form before
+      // refreshing
+      member.featured = featured;
 
       setEditState(false);
     } else {
