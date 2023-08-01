@@ -49,7 +49,7 @@ You can review the database schema at [prisma/schema.prisma](https://github.com/
 
 ### Authentication
 
-We employ [next-auth](https://next-auth.js.org/) for passwordless authentication management in the directory.
+We use [next-auth](https://next-auth.js.org/) for passwordless authentication management in the directory.
 
 - Customised pages are located under [pages/auth](https://github.com/orbit-love/member-directory/tree/main/pages/auth).
 - The custom email template is stored under [helpers/next-auth-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/next-auth-helpers.js).
