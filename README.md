@@ -1,111 +1,35 @@
 # The Orbit Member Directory
 
-1. [What is it?](#what-is-it)
-2. [Technical Overview](#technical-overview)
-   1. [Data](#data)
-   2. [Authentication](#authentication)
-      1. [Securing Frontend Pages](#securing-frontend-pages)
-      2. [Securing API Endpoints](#securing-api-endpoints)
-   3. [API Protection](#api-protection)
-3. [Local Setup](#local-setup)
-   1. [Environment Variables](#environment-variables)
-      1. [For Orbit](#for-orbit)
-      2. [For Emails](#for-emails)
-      3. [For the Database](#for-the-database)
-      4. [For next-auth](#for-next-auth)
-   2. [Initial data](#initial-data)
-   3. [Running the server, logging in](#running-the-server-logging-in)
-4. [Setting up your own instance](#setting-up-your-own-instance)
-   1. [Branding](#branding)
-      1. [Update brand colours](#update-brand-colours)
-      2. [Update brand images](#update-brand-images)
-      3. [Update SEO](#update-seo)
-   2. [Hosting (Recommended)](#hosting-recommended)
-5. [General tips](#general-tips)
-   1. [Changing the DB structure](#changing-the-db-structure)
+- [The Orbit Member Directory](#the-orbit-member-directory)
+  - [What is it?](#what-is-it)
+- [Local Setup](#local-setup)
+  - [Environment Variables](#environment-variables)
+    - [For Orbit](#for-orbit)
+    - [For Emails](#for-emails)
+    - [For the Database](#for-the-database)
+    - [For next-auth](#for-next-auth)
+  - [Initial data](#initial-data)
+  - [Running the server, logging in](#running-the-server-logging-in)
+- [Technical Overview](#technical-overview)
+  - [Data](#data)
+  - [Authentication](#authentication)
+    - [Securing Frontend Pages](#securing-frontend-pages)
+    - [Securing API Endpoints](#securing-api-endpoints)
+  - [API protection](#api-protection)
+- [Setting up your own instance](#setting-up-your-own-instance)
+  - [Branding](#branding)
+    - [Update brand colours](#update-brand-colours)
+    - [Update brand images](#update-brand-images)
+  - [Update SEO](#update-seo)
+  - [Hosting (Recommended)](#hosting-recommended)
+- [General tips](#general-tips)
+  - [Changing the DB structure](#changing-the-db-structure)
 
 ## What is it?
 
 This app lets you host a subset of the members in your community and let them share their social profiles & a short bio about themselves. It is ideal for promoting engagement and fostering relationships between members.
 
 ![The landing page of the member directory, with Orbit branding.](https://github.com/orbit-love/member-directory/assets/45462299/a1bad632-4437-4aaf-9459-e310e17c04c2)
-
-## Technical Overview
-
-Diagram here...
-
-### Data
-
-[Prisma](https://www.prisma.io/) is used to interface with a Postgres database that exists between the Orbit API and the member directory. This provides control over the data, allowing for manipulation independent of your main data store n Orbit. For example, we've added "bio" and "admin" fields not required by the Orbit application.
-
-Data is fetched from Orbit using the `/api/populate-members-table` API endpoint. This will sync the Prisma database with members from Orbit that meet the following criteria:
-
-- They have an email (which they will need to sign in)
-- They have a tag, defined by the ORBIT_TAG environment variable (which is so the community manager can control which members appear in the directory)
-
-You can review the database schema at [prisma/schema.prisma](https://github.com/orbit-love/member-directory/blob/main/prisma/schema.prisma).
-
-[helpers/prisma-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/prisma-helpers.js) is used for managing interactions with Prisma.
-
-### Authentication
-
-We use [next-auth](https://next-auth.js.org/) for passwordless authentication management in the directory.
-
-- Customised pages are located under [pages/auth](https://github.com/orbit-love/member-directory/tree/main/pages/auth).
-- The custom email template is stored under [helpers/next-auth-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/next-auth-helpers.js).
-- Configuration settings are found in [pages/api/auth/[...nextauth].js](https://github.com/orbit-love/member-directory/blob/main/pages/api/auth/%5B...nextauth%5D.js). Some significant configuration changes are listed here:
-
-1. When users try to sign-in, we first verify their existence in the directory database. This means only listed directory members can access it.
-
-2. If a user **not** listed in the directory tries to sign in, we redirect them to the "Verify Request" page, not the error page. This prevents exposing which email addresses are in the directory. The check is repeated on the frontend, with the following code block from the authentication error page:
-
-```
-# pages/auth/error.js
-
-if (error === "AccessDenied") {
-router.replace("/auth/verify-request");
-}
-```
-
-3. Once a user signs in, we set the "admin" flag in the session object based on their admin status in the database. This allows us to modify the UI based on whether a member is an admin or not.
-
-#### Securing Frontend Pages
-
-The app has two layouts: LayoutAuthenticated and LayoutUnauthenticated. All pages utilize one of these layouts. Both have a hook that runs on load, fetching the current session and performing the appropriate redirection:
-
-- Unauthenticated users attempting to access a protected page are redirected to the login page.
-- Authenticated users trying to access an unauthenticated page are redirected to the full directory.
-
-#### Securing API Endpoints
-
-Protection for API routes is achieved with higher-order functions defined in [helpers/api-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/api-helpers.js). One such function, `withAuthCheck`, ensures a user is signed in before granting them access to the endpoint. For more details on these, refer to the next section, [API Protection](#api-protection).
-
-### API protection
-
-We utilizie higher-order functions to perform common API protections - these are inspired by Ruby on Rails `before_action` hooks, if you are familiar. Here is a sample API route with a "withAuthCheck" protection to illustrate how the pieces work together:
-
-```
-# members.js
-
-async function handle(req, res) {
-  // Do something
-}
-
-const withAuthCheck = async () => {
-  return async (req, res) => {
-    // Logic to check user is signed in
-
-    // If the check passed, call the actual handler
-    return handler(req, res);
-  };
-}
-
-export default withAuthCheck(withMethodCheck(handle));
-```
-
-`handle`, the main logic of the endpoint, is enveloped in higher-order functions that operate like before_hooks. If these functions pass, the main request handler is then invoked.
-
-Common validations are stored in [helpers/api-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/api-helpers.js) for ease of reuse, such as: "is user signed in?" or "is user an admin?"
 
 ## Local Setup
 
@@ -194,6 +118,83 @@ yarn test --watch
 to run the automated tests in an instance where they hot-reload with changes.
 
 As an admin you should be able to sync members from the UI once you've signed in, which will pull the latest data from Orbit.
+
+## Technical Overview
+
+![](https://github.com/orbit-love/member-directory/assets/45462299/084aacb2-ab38-4de1-8789-85b1b43db0fc)
+
+### Data
+
+[Prisma](https://www.prisma.io/) is used to interface with a Postgres database that exists between the Orbit API and the member directory. This provides control over the data, allowing for manipulation independent of your main data store n Orbit. For example, we've added "bio" and "admin" fields not required by the Orbit application.
+
+Data is fetched from Orbit using the `/api/populate-members-table` API endpoint. This will sync the Prisma database with members from Orbit that meet the following criteria:
+
+- They have an email (which they will need to sign in)
+- They have a tag, defined by the ORBIT_TAG environment variable (which is so the community manager can control which members appear in the directory)
+
+You can review the database schema at [prisma/schema.prisma](https://github.com/orbit-love/member-directory/blob/main/prisma/schema.prisma).
+
+[helpers/prisma-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/prisma-helpers.js) is used for managing interactions with Prisma.
+
+### Authentication
+
+We use [next-auth](https://next-auth.js.org/) for passwordless authentication management in the directory.
+
+- Customised pages are located under [pages/auth](https://github.com/orbit-love/member-directory/tree/main/pages/auth).
+- The custom email template is stored under [helpers/next-auth-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/next-auth-helpers.js).
+- Configuration settings are found in [pages/api/auth/[...nextauth].js](https://github.com/orbit-love/member-directory/blob/main/pages/api/auth/%5B...nextauth%5D.js). Some significant configuration changes are listed here:
+
+1. When users try to sign-in, we first verify their existence in the directory database. This means only listed directory members can access it.
+
+2. If a user **not** listed in the directory tries to sign in, we redirect them to the "Verify Request" page, not the error page. This prevents exposing which email addresses are in the directory. The check is repeated on the frontend, with the following code block from the authentication error page:
+
+```
+# pages/auth/error.js
+
+if (error === "AccessDenied") {
+router.replace("/auth/verify-request");
+}
+```
+
+3. Once a user signs in, we set the "admin" flag in the session object based on their admin status in the database. This allows us to modify the UI based on whether a member is an admin or not.
+
+#### Securing Frontend Pages
+
+The app has two layouts: LayoutAuthenticated and LayoutUnauthenticated. All pages utilize one of these layouts. Both have a hook that runs on load, fetching the current session and performing the appropriate redirection:
+
+- Unauthenticated users attempting to access a protected page are redirected to the login page.
+- Authenticated users trying to access an unauthenticated page are redirected to the full directory.
+
+#### Securing API Endpoints
+
+Protection for API routes is achieved with higher-order functions defined in [helpers/api-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/api-helpers.js). One such function, `withAuthCheck`, ensures a user is signed in before granting them access to the endpoint. For more details on these, refer to the next section, [API Protection](#api-protection).
+
+### API protection
+
+We utilizie higher-order functions to perform common API protections - these are inspired by Ruby on Rails `before_action` hooks, if you are familiar. Here is a sample API route with a "withAuthCheck" protection to illustrate how the pieces work together:
+
+```
+# members.js
+
+async function handle(req, res) {
+  // Do something
+}
+
+const withAuthCheck = async () => {
+  return async (req, res) => {
+    // Logic to check user is signed in
+
+    // If the check passed, call the actual handler
+    return handler(req, res);
+  };
+}
+
+export default withAuthCheck(withMethodCheck(handle));
+```
+
+`handle`, the main logic of the endpoint, is enveloped in higher-order functions that operate like before_hooks. If these functions pass, the main request handler is then invoked.
+
+Common validations are stored in [helpers/api-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/api-helpers.js) for ease of reuse, such as: "is user signed in?" or "is user an admin?"
 
 ## Setting up your own instance
 
