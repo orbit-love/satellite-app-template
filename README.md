@@ -1,6 +1,6 @@
 # Creating new satellite apps
 
-- [The Orbit Member Directory](#the-orbit-member-directory)
+- [Creating new satellite apps](#creating-new-satellite-apps)
   - [What is this?](#what-is-this)
 - [Local Setup](#local-setup)
   - [Environment Variables](#environment-variables)
