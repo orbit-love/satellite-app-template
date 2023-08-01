@@ -55,7 +55,7 @@ We use [next-auth](https://next-auth.js.org/) for passwordless authentication ma
 - The custom email template is stored under [helpers/next-auth-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/next-auth-helpers.js).
 - Configuration settings are found in [pages/api/auth/[...nextauth].js](https://github.com/orbit-love/member-directory/blob/main/pages/api/auth/%5B...nextauth%5D.js). Some significant configuration changes are listed here:
 
-1. Upon a user's sign-in attempt, we first verify their existence in the directory database. This means only listed directory members can access it.
+1. When users try to sign-in, we first verify their existence in the directory database. This means only listed directory members can access it.
 
 2. If a user **not** listed in the directory tries to sign in, we redirect them to the "Verify Request" page, not the error page. This prevents exposing which email addresses are in the directory. The check is repeated on the frontend, with the following code block from the authentication error page:
 
