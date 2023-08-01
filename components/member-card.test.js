@@ -97,8 +97,8 @@ describe("MemberCard", () => {
   it("should switch to edit state when clicking the edit button", () => {
     render(<MemberCard member={member} editable />);
 
-    let saveElement = screen.queryByText("Save");
-    let cancelElement = screen.queryByText("Cancel");
+    const saveElement = screen.queryByText("Save");
+    const cancelElement = screen.queryByText("Cancel");
 
     expect(saveElement).toBeNull();
     expect(cancelElement).toBeNull();
@@ -106,10 +106,10 @@ describe("MemberCard", () => {
     const editElement = screen.getByText("Edit");
     fireEvent.click(editElement);
 
-    saveElement = screen.getByText("Save");
-    cancelElement = screen.getByText("Cancel");
+    const saveElements = screen.getAllByText("Save");
+    const cancelElements = screen.getAllByText("Cancel");
 
-    expect(saveElement).toBeInTheDocument();
-    expect(cancelElement).toBeInTheDocument();
+    expect(saveElements[0]).toBeInTheDocument();
+    expect(cancelElements[0]).toBeInTheDocument();
   });
 });

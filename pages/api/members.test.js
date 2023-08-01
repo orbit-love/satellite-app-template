@@ -30,11 +30,17 @@ describe("/api/members", () => {
     jest.clearAllMocks();
   });
 
-  it("responds with 200 and returns members", async () => {
+  it("responds with 200 and returns members & features seperately", async () => {
+    const expectedFeatures = [
+      { id: 1, email: "featured1@faker.com" },
+      { id: 2, email: "featured2@faker.com" },
+    ];
+
     const expectedMembers = [
       { id: 1, email: "member1@faker.com" },
       { id: 2, email: "member2@faker.com" },
     ];
+    getAllMembers.mockResolvedValueOnce(expectedFeatures);
     getAllMembers.mockResolvedValueOnce(expectedMembers);
 
     const req = { method: "GET" };
@@ -42,9 +48,14 @@ describe("/api/members", () => {
     await handle(req, res);
 
     // Fetches all members
-    expect(getAllMembers).toHaveBeenCalledWith();
+    expect(getAllMembers).toHaveBeenCalledTimes(2);
+    expect(getAllMembers).toHaveBeenCalledWith({ where: { featured: true } });
+    expect(getAllMembers).toHaveBeenCalledWith({ where: { featured: false } });
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(expectedMembers);
+    expect(res.json).toHaveBeenCalledWith({
+      featured: expectedFeatures,
+      members: expectedMembers,
+    });
   });
 
   it("responds with 500 when prisma query fails", async () => {

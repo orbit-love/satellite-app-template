@@ -1,12 +1,11 @@
 import { useState } from "react";
 import LayoutAuthenticated from "../components/layout-authenticated";
-import MemberCard from "../components/member-card";
-import { useSession } from "next-auth/react";
 import AdminControls from "../components/admin-controls/admin-controls";
+import MemberList from "../components/member-list";
 
-export default function Home({ initialMembers }) {
+export default function Home({ initialMembers, initialFeatured }) {
   const [members, setMembers] = useState(initialMembers);
-  const { data: session } = useSession();
+  const [featured] = useState(initialFeatured);
 
   return (
     <LayoutAuthenticated>
@@ -25,29 +24,9 @@ export default function Home({ initialMembers }) {
 
         <AdminControls setMembers={setMembers} />
 
-        {!!members && members.length > 0 ? (
-          <ul
-            role="list"
-            className="grid grid-cols-1 gap-x-6 gap-y-20 mt-20 mx-auto max-w-2xl sm:grid-cols-2 lg:gap-x-10 lg:max-w-6xl xl:max-w-none 2xl:grid-cols-3"
-          >
-            {members.map((member) => {
-              // Only show members who are visible in directory
-              if (member.shownInDirectory)
-                return (
-                  <MemberCard
-                    member={member}
-                    editable={
-                      member.email === session?.user.email ||
-                      session?.user.admin
-                    }
-                    key={member.id}
-                  />
-                );
-            })}
-          </ul>
-        ) : (
-          ""
-        )}
+        <MemberList title="Featured Guests" members={featured} />
+
+        <MemberList title="All Members" members={members} />
       </div>
     </LayoutAuthenticated>
   );
@@ -65,11 +44,14 @@ export async function getServerSideProps(context) {
 
   if (!data) {
     return {
-      props: { initialMembers: [] },
+      props: { initialMembers: [], initialFeatured: [] },
     };
   }
 
   return {
-    props: { initialMembers: data },
+    props: {
+      initialMembers: data.members || [],
+      initialFeatured: data.featured || [],
+    },
   };
 }

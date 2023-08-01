@@ -69,7 +69,7 @@ export default function RevokeAccess({ id, setError }) {
       <button
         type="submit"
         disabled={!isConfirmed}
-        className="focus-visible:outline-brand-light inline-block flex-none py-2.5 px-3 w-full text-white bg-red-700 rounded-md shadow-sm hover:bg-red-800 focus:bg-red-800 focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2 disabled:bg-red-800"
+        className="focus-visible:outline-brand-light inline-block flex-none py-2.5 px-3 w-full text-white bg-red-700 rounded-md shadow-sm hover:bg-red-800 focus:bg-red-800 focus-visible:outline-2 focus-visible:outline focus-visible:outline-offset-2 disabled:opacity-40"
       >
         Remove yourself from directory
       </button>
