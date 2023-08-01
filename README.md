@@ -1,7 +1,7 @@
-# The Orbit Member Directory
+# Creating new satellite apps
 
 - [The Orbit Member Directory](#the-orbit-member-directory)
-  - [What is it?](#what-is-it)
+  - [What is this?](#what-is-this)
 - [Local Setup](#local-setup)
   - [Environment Variables](#environment-variables)
     - [For Orbit](#for-orbit)
@@ -25,11 +25,18 @@
 - [General tips](#general-tips)
   - [Changing the DB structure](#changing-the-db-structure)
 
-## What is it?
+## What is this?
 
-This app lets you host a subset of the members in your community and let them share their social profiles & a short bio about themselves. It is ideal for promoting engagement and fostering relationships between members.
+This is a template repo to let you quickly scaffold new satellite apps. By default it has:
 
-![The landing page of the member directory, with Orbit branding.](https://github.com/orbit-love/member-directory/assets/45462299/a1bad632-4437-4aaf-9459-e310e17c04c2)
+1. Passwordless authentication with next-auth
+2. A database that stores member names, emails, avatars, and an "admin" flag
+3. An API route to instantiate the first admin method
+4. An API route and admin-only button to fetch members from Orbit
+5. Basic SEO (which will need to be updated!)
+6. Testing frameworks set up, with `react-testing-library` for component tests & `jest` for everything else
+
+![The login page of this app, with a call to action to update the template text](https://github.com/orbit-love/member-directory/assets/45462299/6478ba94-0a17-4e50-a06e-2902bcac127c)
 
 ## Local Setup
 
@@ -51,8 +58,7 @@ Four environment variables are needed to connect to your Orbit workspace:
 
 1. API_KEY: the user or workspace-scope API key for fetching data from Orbit.
 2. WORKSPACE_SLUG: identifies which workspace to source data from.
-3. ORBIT_TAG: designates which members in your main Orbit workspace should be tagged to appear in the member directory.
-4. ROOT_USER_EMAIL: used to instantiate the initial admin user. This is set via environment variables to prevent misuse upon a new instance deployment.
+3. ROOT_USER_EMAIL: used to instantiate the initial admin user. This is set via environment variables to prevent misuse upon a new instance deployment.
 
 Fill in these variables appropriately in your `.env` file.
 
@@ -72,7 +78,7 @@ The default settings for PostgreSQL are:
 4. Password: postgres
 5. Database name: member-directory-dev (this can be altered as needed)
 
-Adjust these settings in your `.env` file if your configuration differs.
+Adjust these settings if your configuration differs.
 
 With this information, you can populate the environment variable as guided. This example would be:
 
@@ -107,7 +113,7 @@ Right, I feel like that was a lot 😪 But don't worry, that's all one-time setu
 yarn dev
 ```
 
-& visit [localhost:3000](http://localhost:3000) to see the directory, and [localhost:8025](http://localhost:8025) to see incoming emails to sign in.
+& visit [localhost:3000](http://localhost:3000) to see the template, and [localhost:8025](http://localhost:8025) to see incoming emails to sign in.
 
 And it's
 
@@ -121,16 +127,13 @@ As an admin you should be able to sync members from the UI once you've signed in
 
 ## Technical Overview
 
-![](https://github.com/orbit-love/member-directory/assets/45462299/084aacb2-ab38-4de1-8789-85b1b43db0fc)
+![](https://github.com/orbit-love/member-directory/assets/45462299/d288df3a-7bc3-445c-93aa-87e6967379d3)
 
 ### Data
 
-[Prisma](https://www.prisma.io/) is used to interface with a Postgres database that exists between the Orbit API and the member directory. This provides control over the data, allowing for manipulation independent of your main data store n Orbit. For example, we've added "bio" and "admin" fields not required by the Orbit application.
+[Prisma](https://www.prisma.io/) is used to interface with a Postgres database that exists between the Orbit API and the member directory. This provides control over the data, allowing for manipulation independent of your main data store in Orbit. For example, we've added an "admin" field not required by the Orbit application.
 
-Data is fetched from Orbit using the `/api/populate-members-table` API endpoint. This will sync the Prisma database with members from Orbit that meet the following criteria:
-
-- They have an email (which they will need to sign in)
-- They have a tag, defined by the ORBIT_TAG environment variable (which is so the community manager can control which members appear in the directory)
+Data is fetched from Orbit using the `/api/populate-members-table` API endpoint. This will sync the Prisma database with members from Orbit if they have an email, which is required for them to sign in.
 
 You can review the database schema at [prisma/schema.prisma](https://github.com/orbit-love/member-directory/blob/main/prisma/schema.prisma).
 
@@ -138,13 +141,13 @@ You can review the database schema at [prisma/schema.prisma](https://github.com/
 
 ### Authentication
 
-We use [next-auth](https://next-auth.js.org/) for passwordless authentication management in the directory.
+We use [next-auth](https://next-auth.js.org/) for passwordless authentication management.
 
 - Customised pages are located under [pages/auth](https://github.com/orbit-love/member-directory/tree/main/pages/auth).
 - The custom email template is stored under [helpers/next-auth-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/next-auth-helpers.js).
 - Configuration settings are found in [pages/api/auth/[...nextauth].js](https://github.com/orbit-love/member-directory/blob/main/pages/api/auth/%5B...nextauth%5D.js). Some significant configuration changes are listed here:
 
-1. When users try to sign-in, we first verify their existence in the directory database. This means only listed directory members can access it.
+1. When users try to sign-in, we first verify their existence in the Prisma database. This means only listed members can access it.
 
 2. If a user **not** listed in the directory tries to sign in, we redirect them to the "Verify Request" page, not the error page. This prevents exposing which email addresses are in the directory. The check is repeated on the frontend, with the following code block from the authentication error page:
 
@@ -171,7 +174,7 @@ Protection for API routes is achieved with higher-order functions defined in [he
 
 ### API protection
 
-We utilizie higher-order functions to perform common API protections - these are inspired by Ruby on Rails `before_action` hooks, if you are familiar. Here is a sample API route with a "withAuthCheck" protection to illustrate how the pieces work together:
+We utilise higher-order functions to perform common API protections - these are inspired by Ruby on Rails `before_action` hooks, if you are familiar. Here is a sample API route with a "withAuthCheck" protection to illustrate how the pieces work together:
 
 ```
 # members.js
