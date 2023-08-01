@@ -38,19 +38,22 @@ Diagram here...
 
 [Prisma](https://www.prisma.io/) is used to interface with a Postgres database that exists between the Orbit API and the member directory. This provides control over the data, allowing for manipulation independent of your main data store n Orbit. For example, we've added "bio" and "admin" fields not required by the Orbit application.
 
-Data is fetched from Orbit using the /api/populate-members-table API route. This process fetches members fitting specific criteria (presence of an email and a defined tag in environment variables) and upserts them into Prisma. Members that no longer meet these criteria and still exist in Prisma are removed.
+Data is fetched from Orbit using the `/api/populate-members-table` API endpoint. This will sync the Prisma database with members from Orbit that meet the following criteria:
 
-You can review the database schema at prisma/schema.prisma.
+- They have an email (which they will need to sign in)
+- They have a tag, defined by the ORBIT_TAG environment variable (which is so the community manager can control which members appear in the directory)
 
-helpers/prisma-helpers.js is used for managing interactions with Prisma.
+You can review the database schema at [prisma/schema.prisma](https://github.com/orbit-love/member-directory/blob/main/prisma/schema.prisma).
+
+[helpers/prisma-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/prisma-helpers.js) is used for managing interactions with Prisma.
 
 ### Authentication
 
 We employ [next-auth](https://next-auth.js.org/) for passwordless authentication management in the directory.
 
-- Customised pages are located under `pages/auth`.
-- The custom email template is stored under `helpers/next-auth-helpers.js`.
-- Configuration settings are found in `pages/api/auth/[...nextauth].js`. Some significant configuration changes are listed here:
+- Customised pages are located under [pages/auth](https://github.com/orbit-love/member-directory/tree/main/pages/auth).
+- The custom email template is stored under [helpers/next-auth-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/next-auth-helpers.js).
+- Configuration settings are found in [pages/api/auth/[...nextauth].js](https://github.com/orbit-love/member-directory/blob/main/pages/api/auth/%5B...nextauth%5D.js). Some significant configuration changes are listed here:
 
 1. Upon a user's sign-in attempt, we first verify their existence in the directory database. This means only listed directory members can access it.
 
@@ -75,27 +78,11 @@ The app has two layouts: LayoutAuthenticated and LayoutUnauthenticated. All page
 
 #### Securing API Endpoints
 
-Protection for API routes is achieved with higher-order functions defined in `helpers/api-helpers.js`. One such function, `withAuthCheck`, ensures a user is signed in before granting them access to the endpoint. For more details on these, refer to the next section, [API Protection](#api-protection).
+Protection for API routes is achieved with higher-order functions defined in [helpers/api-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/api-helpers.js). One such function, `withAuthCheck`, ensures a user is signed in before granting them access to the endpoint. For more details on these, refer to the next section, [API Protection](#api-protection).
 
 ### API protection
 
-We utilize higher-order functions to emulate the behavior of Ruby on Rails' `before_action` hooks. To illustrate this, here are two pieces of code that perform similarly:
-
-```
-# members_controller.rb
-
-before_action :verify_user_signed_in
-
-def index
-  puts "This will only execute if user is signed in"
-end
-
-private
-
-def verify_user_signed_in
-  # Logic to check user is signed in
-end
-```
+We utilizie higher-order functions to perform common API protections - these are inspired by Ruby on Rails `before_action` hooks, if you are familiar. Here is a sample API route with a "withAuthCheck" protection to illustrate how the pieces work together:
 
 ```
 # members.js
@@ -116,9 +103,9 @@ const withAuthCheck = async () => {
 export default withAuthCheck(withMethodCheck(handle));
 ```
 
-In the JavaScript version, the exported handler is enveloped in higher-order functions that operate like before_hooks. If these functions pass, the main request handler is then invoked.
+`handle`, the main logic of the endpoint, is enveloped in higher-order functions that operate like before_hooks. If these functions pass, the main request handler is then invoked.
 
-Common validations are stored in `helpers/api-helpers.js` for ease of reuse, such as: "is user signed in?" or "is user an admin?"
+Common validations are stored in [helpers/api-helpers.js](https://github.com/orbit-love/member-directory/blob/main/helpers/api-helpers.js) for ease of reuse, such as: "is user signed in?" or "is user an admin?"
 
 ## Local Setup
 
@@ -149,7 +136,7 @@ Fill in these variables appropriately in your `.env` file.
 
 We use nodemailer and MailHog for email authentication. Install [MailHog](https://github.com/mailhog/MailHog), run the service, and ensure the HTTP server is accessible at [localhost:8025](http://localhost:8025).
 
-If necessary, you can change the email provider configuration in `pages/api/auth/[...nextauth].js` - but just having mailhog running & using the default env vars from the example should be enough to get you up and running.
+If necessary, you can change the email provider configuration in [pages/api/auth/[...nextauth].js](https://github.com/orbit-love/member-directory/blob/main/pages/api/auth/%5B...nextauth%5D.js) - but just having mailhog running & using the default env vars from the example should be enough to get you up and running.
 
 #### For the Database
 
@@ -216,7 +203,7 @@ We aim to keep this app flexible, and require minimal changes to switch over the
 
 #### Update brand colours
 
-You can update the brand colors in the `tailwind.config.js` file by modifying these variables:
+You can update the brand colors in the [tailwind.config.js](https://github.com/orbit-love/member-directory/blob/main/tailwind.config.js#L30) file by modifying these variables:
 
 ```
 accent: "#6C4DF6"
@@ -233,7 +220,7 @@ Each color variable is documented in the same file for ease of reference.
 
 ### Update brand images
 
-Replace the following three images to the public/ directory:
+Replace the following three images to the [public/](https://github.com/orbit-love/member-directory/tree/main/public) directory:
 
 1. `brand-icon-dark.svg`, which will be shown in the header bar on light theme screens
 2. `brand-icon-light.svg`, which will be shown in the header bar on dark theme screens
@@ -241,7 +228,7 @@ Replace the following three images to the public/ directory:
 
 ### Update SEO
 
-All SEO for the app is configured using `next-seo`, and lives under `next-seo.config.js`. This is heavily based on a specific customer, so make sure you double-check everything here to reflect your organisation instead.
+All SEO for the app is configured using `next-seo`, and lives under [next-seo.config.js](https://github.com/orbit-love/member-directory/blob/main/next-seo.config.js). This is heavily based on a specific customer, so make sure you double-check everything here to reflect your organisation instead.
 
 The `brand-logo-background` image is referenced twice here, but it **must be an absolute URL**. You can achieve this by uploading it to a location that provides a URL for fetching the image in the future (such as a Cloudinary instance), or by referencing it from the production run of this app, e.g., `www.my-member-directory.com/brand-logo-background.png`. Just remember, this URL won't be valid until the image is uploaded to production.
 
@@ -260,7 +247,7 @@ There is a very convenient [Quickstart Guide](https://vercel.com/docs/storage/ve
 
 ### Changing the DB structure
 
-To change the database structure, for example if you want to add a new field to members, you must... Change the database structure :P You update the `schema.prisma` file & then it will generate migrations for you, rather than the other way around.
+To change the database structure, for example if you want to add a new field to members, you must... Change the database structure :P You update the [schema.prisma](https://github.com/orbit-love/member-directory/blob/main/prisma/schema.prisma) file & then it will generate migrations for you, rather than the other way around.
 
 Say you add the following to the members table:
 
