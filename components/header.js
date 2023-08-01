@@ -10,7 +10,7 @@ export default function Header() {
     <header className="flex gap-x-6 justify-between items-center p-6 mx-auto w-full max-w-7xl lg:px-8">
       <Link className="flex" href="/">
         <Image
-          className="hidden w-auto h-28 dark:block"
+          className="hidden w-auto h-14 dark:block"
           src="/brand-icon-light.svg"
           alt="Home"
           width={50}
@@ -18,7 +18,7 @@ export default function Header() {
         />
 
         <Image
-          className="block w-auto h-28 dark:hidden"
+          className="block w-auto h-14 dark:hidden"
           src="/brand-icon-dark.svg"
           alt="Home"
           width={50}

@@ -1,31 +1,31 @@
 export default {
-  defaultTitle: "DM Dinner Club Member Directory | Powered by Orbit",
+  defaultTitle: "Satellite App | Powered by Orbit",
   description:
-    "Discover who's attending the DM Dinner Club. Connect, network, and engage with attendees, and explore their social profiles all in one place.",
-  canonical: "https://www.members.dmdinner.club/",
+    "This is a template repo! Please update this text in next-seo.config.js",
+  canonical: "https://orbit.love/",
   twitter: {
     cardType: "summary",
     handle: "@RoiStartup",
   },
   openGraph: {
     type: "website",
-    url: "https://www.members.dmdinner.club/",
-    title: "DM Dinner Club Member Directory | Powered by Orbit",
+    url: "https://orbit.love/",
+    title: "Satellite App | Powered by Orbit",
     description:
-      "Discover who's attending the DM Dinner Club. Connect, network, and engage with attendees, and explore their social profiles all in one place.",
+      "This is a template repo! Please update this text in next-seo.config.js",
     images: [
       {
-        url: `https://member-directory-eight.vercel.app/brand-logo-background.png`,
+        url: `https://github.com/orbit-love/member-directory/assets/45462299/952e1aaa-f545-4fca-a2c1-ce287568c663`,
         width: 200,
         height: 200,
-        alt: "DM Dinner Club - Established 2022",
+        alt: "",
       },
     ],
   },
   additionalLinkTags: [
     {
       rel: "icon",
-      href: `https://member-directory-eight.vercel.app/brand-logo-background.png`,
+      href: `https://github.com/orbit-love/member-directory/assets/45462299/952e1aaa-f545-4fca-a2c1-ce287568c663`,
     },
   ],
   additionalMetaTags: [
