@@ -3,30 +3,21 @@ import LayoutAuthenticated from "../components/layout-authenticated";
 import AdminControls from "../components/admin-controls/admin-controls";
 import MemberList from "../components/member-list";
 
-export default function Home({ initialMembers, initialFeatured }) {
+export default function Home({ initialMembers }) {
   const [members, setMembers] = useState(initialMembers);
-  const [featured] = useState(initialFeatured);
 
   return (
     <LayoutAuthenticated>
       <div className="px-6 py-24 mx-auto max-w-[80%] sm:py-32 lg:px-8">
         <section className="mx-auto max-w-2xl sm:text-center">
           <h1 className="text-brand-dark dark:text-brand-light text-3xl font-bold tracking-tight sm:text-4xl">
-            Meet other members
+            You're signed in :)
           </h1>
-
-          <p className="text-brand-dark-highlight dark:text-brand-light-highlight mt-6 text-lg leading-8">
-            This is your space to find others in your community. Engage in
-            conversations, share your ideas, and develop strong relationships.
-            Step in, join the dialogue, and explore the community!
-          </p>
         </section>
 
         <AdminControls setMembers={setMembers} />
 
-        <MemberList title="Featured Guests" members={featured} />
-
-        <MemberList title="All Members" members={members} />
+        <MemberList members={members} />
       </div>
     </LayoutAuthenticated>
   );
@@ -44,14 +35,13 @@ export async function getServerSideProps(context) {
 
   if (!data) {
     return {
-      props: { initialMembers: [], initialFeatured: [] },
+      props: { initialMembers: [] },
     };
   }
 
   return {
     props: {
-      initialMembers: data.members || [],
-      initialFeatured: data.featured || [],
+      initialMembers: data || [],
     },
   };
 }

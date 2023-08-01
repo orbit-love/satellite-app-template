@@ -6,14 +6,12 @@ export default function SignIn({ csrfToken }) {
     <LayoutUnauthenticated>
       <div className="isolate relative px-6 mx-auto max-w-2xl text-center lg:px-8">
         <h1 className="dark:text-brand-light text-brand-dark text-4xl font-bold tracking-tight sm:text-6xl">
-          Member Directory
+          Satellite app template!
         </h1>
 
         <p className="text-brand-dark-highlight dark:text-brand-light-highlight mt-6 text-xl leading-8">
-          Welcome to the Member Directory! This platform serves as a hub for
-          connecting with your fellow community members. Sign in to explore
-          profiles, discover common interests, and engage more actively with
-          your fellow community members.
+          This is the sign-in page for a template satellite app. Modify me in{" "}
+          <code>pages/auth/sign-in.js</code>
         </p>
 
         <form

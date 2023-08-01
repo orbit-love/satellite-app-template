@@ -4,10 +4,9 @@ import { withAuthCheck, withMethodCheck } from "../../helpers/api-helpers";
 
 async function handle(req, res) {
   try {
-    const featured = await getAllMembers({ where: { featured: true } });
-    const members = await getAllMembers({ where: { featured: false } });
+    const members = await getAllMembers();
 
-    res.status(200).json({ featured, members });
+    res.status(200).json(members);
   } catch (e) {
     console.error(`Something went wrong. ${e.message}`);
     res.status(500).send();

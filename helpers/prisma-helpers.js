@@ -1,5 +1,4 @@
 import prisma from "../lib/db";
-import { fetchIdentities } from "./member-helpers";
 
 const PERMITTED_PARAMS = ["bio", "shownInDirectory", "shownInPublicDirectory"];
 
@@ -45,12 +44,11 @@ export async function updateMember(body) {
  */
 export async function upsertMember(member, included) {
   const { email, name, avatar_url } = member.attributes;
-  const identities = fetchIdentities(member, included);
 
   return prisma.member.upsert({
     where: { email },
-    update: { name, avatar_url, identities: { create: identities } },
-    create: { email, name, avatar_url, identities: { create: identities } },
+    update: { name, avatar_url },
+    create: { email, name, avatar_url },
   });
 }
 
@@ -78,9 +76,6 @@ export async function getAllMembers(additionalClause) {
     ...additionalClause,
     orderBy: {
       name: "asc",
-    },
-    include: {
-      identities: true,
     },
   });
 }

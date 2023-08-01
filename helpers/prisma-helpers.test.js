@@ -53,11 +53,8 @@ describe("updateMember", () => {
 });
 
 describe("#getAllMembers", () => {
-  it("should return all members with default ordering and included identities", async () => {
-    const mockData = [
-      { name: "John Doe", identities: [] },
-      { name: "Jane Doe", identities: [] },
-    ];
+  it("should return all members with default ordering", async () => {
+    const mockData = [{ name: "John Doe" }, { name: "Jane Doe" }];
 
     prisma.member.findMany.mockResolvedValue(mockData);
 
@@ -67,15 +64,11 @@ describe("#getAllMembers", () => {
     // Check that findMany was called with the default search queries
     expect(prisma.member.findMany).toHaveBeenCalledWith({
       orderBy: { name: "asc" },
-      include: { identities: true },
     });
   });
 
   it("should merge the additional clause with the default search queries when provided", async () => {
-    const mockData = [
-      { name: "John Doe", identities: [] },
-      { name: "Jane Doe", identities: [] },
-    ];
+    const mockData = [{ name: "John Doe" }, { name: "Jane Doe" }];
 
     prisma.member.findMany.mockResolvedValue(mockData);
 
@@ -88,7 +81,6 @@ describe("#getAllMembers", () => {
     expect(prisma.member.findMany).toHaveBeenCalledWith({
       ...additionalClause,
       orderBy: { name: "asc" },
-      include: { identities: true },
     });
   });
 });
