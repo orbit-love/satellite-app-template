@@ -1,9 +1,5 @@
 import prisma from "../lib/db";
-import {
-  getAllMemberEmails,
-  getAllMembers,
-  updateMember,
-} from "./prisma-helpers";
+import { getAllMemberEmails, getAllMembers } from "./prisma-helpers";
 
 // mock the Prisma client
 jest.mock("../lib/db", () => ({
@@ -15,41 +11,6 @@ jest.mock("../lib/db", () => ({
 
 afterEach(() => {
   jest.clearAllMocks();
-});
-
-describe("updateMember", () => {
-  it("should filter out non-permitted params and update the member", async () => {
-    const mockBody = {
-      id: "1",
-      bio: "New Bio",
-      shownInDirectory: false,
-      notPermittedParam: "Some value",
-    };
-
-    prisma.member.update.mockResolvedValue();
-
-    await updateMember(mockBody);
-
-    // Verify only permitted params included
-    expect(prisma.member.update).toHaveBeenCalledWith({
-      where: { id: parseInt(mockBody.id) },
-      data: { bio: mockBody.bio, shownInDirectory: mockBody.shownInDirectory },
-    });
-  });
-
-  it("should handle the error when updating the member fails", async () => {
-    const mockBody = { id: "1", bio: "New Bio", shownInDirectory: true };
-
-    prisma.member.update.mockRejectedValue(
-      new Error("Failed to update member")
-    );
-
-    try {
-      await updateMember(mockBody);
-    } catch (error) {
-      expect(error).toEqual(new Error("Failed to update member"));
-    }
-  });
 });
 
 describe("#getAllMembers", () => {

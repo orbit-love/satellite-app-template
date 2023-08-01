@@ -15,21 +15,7 @@ model Member {
   email String  @unique
   name  String?
   avatar_url  String?
-  identities Identity[]
-  bio String? @db.VarChar(175)
   admin Boolean @default(false)
-  shownInDirectory Boolean @default(true)
-  shownInPublicDirectory Boolean @default(false)
-  featured Boolean @default(false)
-}
-
-model Identity {
-  id       Int  @id @default(autoincrement())
-  member   Member @relation(fields: [memberId], references: [id])
-  memberId Int // relation scalar field  (used in the `@relation` attribute above)
-  type String
-  profile_url String
-  username String
 }
 
 model Account {

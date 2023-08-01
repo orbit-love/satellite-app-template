@@ -13,11 +13,7 @@ export const authOptions = {
   callbacks: {
     async signIn({ user }) {
       // Ensure only users who are present in the directory can sign in
-      const validEmails = await getAllMemberEmails({
-        where: {
-          shownInDirectory: true,
-        },
-      });
+      const validEmails = await getAllMemberEmails();
 
       if (validEmails.includes(user.email)) return true;
 
