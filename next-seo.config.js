@@ -15,7 +15,7 @@ export default {
       "Discover who's attending the DM Dinner Club. Connect, network, and engage with attendees, and explore their social profiles all in one place.",
     images: [
       {
-        url: `https://member-directory-eight.vercel.app/dm-logo-background.png`,
+        url: `https://member-directory-eight.vercel.app/brand-logo-background.png`,
         width: 200,
         height: 200,
         alt: "DM Dinner Club - Established 2022",
@@ -25,7 +25,7 @@ export default {
   additionalLinkTags: [
     {
       rel: "icon",
-      href: `https://member-directory-eight.vercel.app/dm-logo-background.png`,
+      href: `https://member-directory-eight.vercel.app/brand-logo-background.png`,
     },
   ],
   additionalMetaTags: [
