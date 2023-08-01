@@ -5,7 +5,7 @@ export default function DefaultHead() {
   return (
     <Head>
       <title>Member Directory</title>
-      <link rel="icon" type="image/svg+xml" href="/dm-icon-light.svg" />
+      <link rel="icon" type="image/svg+xml" href="/brand-logo-background.png" />
     </Head>
   );
 }
