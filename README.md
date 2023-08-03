@@ -76,20 +76,20 @@ The default settings for PostgreSQL are:
 2. Port: 5432
 3. Username: postgres
 4. Password: postgres
-5. Database name: member-directory-dev (this can be altered as needed)
+5. Database name: satellite-app-dev (this can be altered as needed)
 
 Adjust these settings if your configuration differs.
 
 With this information, you can populate the environment variable as guided. This example would be:
 
 ```
-POSTGRES_PRISMA_URL=postgresql://postgres:postgres@localhost:5432/member-directory-dev?schema=public
+POSTGRES_PRISMA_URL=postgresql://postgres:postgres@localhost:5432/satellite-app-dev?schema=public
 ```
 
 And now to set up the database, execute these commands:
 
 ```
-npx prisma db push
+npx prisma db push # if you haven't run yarn install, this will ask to install the prisma package. Say yes
 npx prisma generate
 ```
 
